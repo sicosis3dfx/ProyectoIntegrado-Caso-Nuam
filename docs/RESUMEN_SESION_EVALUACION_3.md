@@ -114,6 +114,18 @@ Para evitar la sensación de congelamiento o incertidumbre en la pantalla durant
 * **Validación Algorítmica Módulo 11:** Verificación instantánea del dígito verificador. Si es correcto, muestra un sello verde `✅ RUT válido (Módulo 11 CMF)`; si el dígito no corresponde a la fórmula bancaria, advierte al operador con `⚠️ Dígito verificador no coincide`.
 * **Normalización en Backend y Login:** El backend normaliza de forma canónica cualquier RUT recibido antes de persistirlo en Supabase PostgreSQL y permite que en el inicio de sesión (`LoginView`) los usuarios puedan ingresar su RUT con o sin puntos ni guiones de forma indistinta.
 
+### 3.11. Optimización UI/UX Avanzada y Vista en Cuadros (Aporte Colaborativo de Equipo)
+* **Selector de Modo de Visualización (Lista vs. Cuadros / Cards):**  
+  Tanto en el **Dashboard** como en el **Repositorio Multianual**, se integró un componente selector (`ViewToggle`) que permite al usuario alternar entre la tabla tradicional de datos y una vista de **tarjetas independientes (`CertificateCard`)**, ideal para pantallas táctiles y celulares.
+* **Skeleton Shimmer Loading:**  
+  Se reemplazó el texto estático de carga por un esqueleto animado (`table-skeleton`) con efecto de brillo fluido (*shimmer*), aumentando la percepción de velocidad de respuesta.
+* **TopBar Fijo con Desenfoque Dinámico:**  
+  La barra superior ahora utiliza el hook `useWindowScroll` para volverse fija (*sticky*) al hacer scroll en dispositivos móviles, aplicando un elegante fondo semitransparente con `backdrop-filter: blur(12px)`.
+* **Animaciones con Intersection Observer:**  
+  A través del hook `useIntersection`, las tarjetas de certificados se animan suavemente al entrar en el viewport y respetan la directiva de accesibilidad `@media (prefers-reduced-motion: reduce)`.
+* **Preservación Integral:**  
+  Todas las funciones previas (papelera SVG para eliminar registros en lista y en tarjetas, cálculo de 6 decimales, sellos ISO 27001 / Ley 21.719) se mantuvieron 100% operativas.
+
 ---
 
 ## 💻 4. Guía para Continuar Trabajando desde Casa
