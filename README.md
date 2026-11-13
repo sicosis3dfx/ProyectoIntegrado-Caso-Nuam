@@ -231,6 +231,7 @@ El ecosistema se encuentra **100% operativo en producción cloud** con persisten
 | :--- | :---: | :--- | :--- |
 | **Frontend Web (SPA)** | **Vercel** | [proyecto-integrado-caso-nuam.vercel.app](https://proyecto-integrado-caso-nuam.vercel.app) | React 19 + TypeScript + Vite |
 | **Backend REST API** | **Render** | [proyectointegrado-caso-nuam.onrender.com](https://proyectointegrado-caso-nuam.onrender.com) | Python 3.14 + Django 5.2 + DRF |
+| **Panel de Administración (Backoffice)** | **Render** | [proyectointegrado-caso-nuam.onrender.com/admin/](https://proyectointegrado-caso-nuam.onrender.com/admin/) | Django Admin (Branding nuam Dual Mode) |
 | **Base de Datos Relacional** | **Supabase** | `aws-0-sa-east-1.pooler.supabase.com` | PostgreSQL 15 (Session Pooler) |
 | **Auditoría Documental** | **MongoDB Atlas** | Cluster Multi-Cloud Inmutable | MongoDB 7.0 + SHA-256 Hashes |
 
@@ -255,6 +256,16 @@ El ecosistema se encuentra **100% operativo en producción cloud** con persisten
 | **Operador Corredora** | `operador@larrainvial.cl` | `12.345.678-9` | `Nuam2026!` | `123456` o `📲 OTP` | Carga masiva CSV y validación DJ 1949. Cierre de lotes bloqueado (HTTP 403). |
 | **Auditor nuam** | `auditor@nuam.com` | `9.876.543-2` | `Nuam2026!` | `123456` o `📲 OTP` | Fiscalización regional, auditoría SHA-256 y **aprobación/cierre de lotes fiscales**. |
 | **Administrador Plataforma** | `admin@nuam.com` | `11.222.333-4` | `Nuam2026!` | `123456` o `📲 OTP` | Control total, matriz RBAC, gestión de usuarios y depuración de registros de prueba. |
+
+#### 🛡️ Acceso de Superusuario al Backoffice (Django Admin)
+Para labores de inspección directa de modelos ORM, tablas físicas en 3FN y auditoría técnica de base de datos:
+* **URL de Acceso Directo:** [https://proyectointegrado-caso-nuam.onrender.com/admin/](https://proyectointegrado-caso-nuam.onrender.com/admin/)
+* **Nombre de Usuario:** `sicosis3dfx`
+* **Contraseña:** `Ponsill@@1`
+* **Características del Panel Personalizado:**
+  * **Branding Oficial nuam:** Imagotipo corporativo servido mediante CDN de alta velocidad y tipografía institucional unificada.
+  * **Soporte Dual Mode (Modo Claro & Modo Oscuro):** Paleta corporativa con Azul Marino Profundo (`#0f172a`), Azul Pizarra (`#1e293b`) y acentos en Naranja nuam (`#f97316` / `#ea580c`) con alternancia dinámica (☀️ / 🌙).
+  * **Navegación Integrada:** El enlace superior *"Ver el sitio"* conecta directamente con la aplicación pública en [Vercel](https://proyecto-integrado-caso-nuam.vercel.app).
 
 ---
 
