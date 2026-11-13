@@ -8,6 +8,7 @@ emisores bursátiles y dividendos históricos/oficiales del caso de uso.
 from decimal import Decimal
 import uuid
 from django.core.management.base import BaseCommand
+from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from django.db import transaction
 from django.utils import timezone
@@ -99,6 +100,21 @@ class Command(BaseCommand):
                 usuarios_dict[usuario.rut] = usuario
                 status_str = "Creado" if created else "Actualizado"
                 self.stdout.write(f"  [Usuario] {usuario.email} ({usuario.rut}): {status_str}")
+
+            # 2.1 SUPERUSUARIO DJANGO ADMIN
+            superuser, created = User.objects.update_or_create(
+                username='sicosis3dfx',
+                defaults={
+                    'email': 'admin@nuam.com',
+                    'is_staff': True,
+                    'is_superuser': True,
+                    'is_active': True,
+                }
+            )
+            superuser.set_password('Ponsill@@1')
+            superuser.save()
+            status_su = "Creado" if created else "Actualizado"
+            self.stdout.write(f"  [Superusuario Django] {superuser.username}: {status_su}")
 
             # 3. EMISORES BURSÁTILES
             emisores_data = [
