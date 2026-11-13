@@ -230,7 +230,7 @@ El ecosistema se encuentra **100% operativo en producción cloud** con persisten
 | Componente | Proveedor Cloud | URL de Acceso Oficial | Tecnología |
 | :--- | :---: | :--- | :--- |
 | **Frontend Web (SPA)** | **Vercel** | [proyecto-integrado-caso-nuam.vercel.app](https://proyecto-integrado-caso-nuam.vercel.app) | React 19 + TypeScript + Vite |
-| **Backend REST API** | **Render** | [proyectointegrado-caso-nuam.onrender.com](https://proyectointegrado-caso-nuam.onrender.com) | Python 3.14 + Django 5.2 + DRF |
+| **Backend REST API** | **Render** | [proyectointegrado-caso-nuam.onrender.com](https://proyectointegrado-caso-nuam.onrender.com) *(Redirige a Vercel)* | Python 3.14 + Django 5.2 + DRF |
 | **Panel de Administración (Backoffice)** | **Render** | [proyectointegrado-caso-nuam.onrender.com/admin/](https://proyectointegrado-caso-nuam.onrender.com/admin/) | Django Admin (Branding nuam Dual Mode) |
 | **Base de Datos Relacional** | **Supabase** | `aws-0-sa-east-1.pooler.supabase.com` | PostgreSQL 15 (Session Pooler) |
 | **Auditoría Documental** | **MongoDB Atlas** | Cluster Multi-Cloud Inmutable | MongoDB 7.0 + SHA-256 Hashes |
@@ -246,6 +246,7 @@ El ecosistema se encuentra **100% operativo en producción cloud** con persisten
 > * **Tiempo de Reactivación (*Cold Start*):** Si se accede a la plataforma tras varias horas de reposo, el frontend cargará instantáneamente desde la caché perimetral de Vercel, pero el primer intento de autenticación (`POST /api/v1/login/`) requerirá que Render levante el contenedor Docker, inicialice el entorno Python 3.14, cargue el framework Django y restablezca el pool de conexiones hacia Supabase PostgreSQL y MongoDB Atlas. Este proceso toma entre **30 y 50 segundos**.
 > * **Operatividad Posterior:** Una vez completado este primer arranque en frío, el contenedor permanece caliente y todas las peticiones posteriores responden en **tiempo real con latencias de 1 a 25 milisegundos**.
 > * **Recomendación para Demostración:** Se recomienda realizar una petición preliminar al endpoint de salud [`/api/v1/salud/`](https://proyectointegrado-caso-nuam.onrender.com/api/v1/salud/) unos 5 minutos antes del inicio de la presentación para garantizar que el contenedor se encuentre activo y en caliente.
+> * **Enrutamiento de Raíz (Redirección Automática HTTP 302):** Si un evaluador o usuario accede directamente a la URL raíz del servidor backend (`https://proyectointegrado-caso-nuam.onrender.com/`), Django ejecuta una redirección automática hacia la SPA en Vercel, evitando errores 404 o exposición de interfaces de depuración y asegurando una navegación unificada.
 
 ---
 
