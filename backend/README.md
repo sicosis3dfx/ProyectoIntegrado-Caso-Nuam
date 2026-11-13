@@ -56,3 +56,11 @@ python manage.py seed_nuam
 python manage.py runserver 8000
 ```
 La API REST responderá en: `http://localhost:8000/api/v1/`
+
+---
+
+### ☁️ Despliegue en la Nube y Consideración de "Cold Start"
+* **Plataforma:** Render Web Service (Free Tier)
+* **URL de Producción:** [https://proyectointegrado-caso-nuam.onrender.com](https://proyectointegrado-caso-nuam.onrender.com)
+* **Endpoint de Salud / Wake-Up:** `/api/v1/salud/`
+* **Nota sobre Suspensión (*Spin-down*):** En el nivel gratuito de Render, el contenedor entra en reposo tras 15 minutos sin tráfico. La primera petición tras horas de inactividad experimentará una latencia de arranque en frío (*cold start*) de 30 a 50 segundos mientras se levanta el runtime y se restablece el pool de conexiones a Supabase y MongoDB. Las peticiones subsecuentes responden con latencias inmediatas (< 50 ms). En producción industrial nuam, se utilizan clústeres reservados con alta disponibilidad permanente (AWS ECS / EKS).

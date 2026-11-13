@@ -236,6 +236,18 @@ El ecosistema se encuentra **100% operativo en producción cloud** con persisten
 
 ---
 
+### ⚠️ Nota Técnica de Infraestructura Cloud: Latencia de Arranque en Frío (*Cold Start*)
+
+> [!NOTE]
+> **Comportamiento del Servidor Backend en Capa Gratuita (Free Tier):**
+> * Para efectos de la presente evaluación académica, el backend Django se encuentra alojado bajo el plan gratuito de **Render**, mientras que el frontend opera sobre la red perimetral (CDN global) de **Vercel**.
+> * **Suspensión por Inactividad (*Spin-Down*):** Render suspende temporalmente el contenedor de la aplicación tras **15 minutos sin peticiones HTTP** para optimizar el consumo de recursos de cómputo en la nube.
+> * **Tiempo de Reactivación (*Cold Start*):** Si se accede a la plataforma tras varias horas de reposo, el frontend cargará instantáneamente desde la caché perimetral de Vercel, pero el primer intento de autenticación (`POST /api/v1/login/`) requerirá que Render levante el contenedor Docker, inicialice el entorno Python 3.14, cargue el framework Django y restablezca el pool de conexiones hacia Supabase PostgreSQL y MongoDB Atlas. Este proceso toma entre **30 y 50 segundos**.
+> * **Operatividad Posterior:** Una vez completado este primer arranque en frío, el contenedor permanece caliente y todas las peticiones posteriores responden en **tiempo real con latencias de 1 a 25 milisegundos**.
+> * **Recomendación para Demostración:** Se recomienda realizar una petición preliminar al endpoint de salud [`/api/v1/salud/`](https://proyectointegrado-caso-nuam.onrender.com/api/v1/salud/) unos 5 minutos antes del inicio de la presentación para garantizar que el contenedor se encuentre activo y en caliente.
+
+---
+
 ### 🔑 Credenciales Oficiales de Demostración
 
 | Rol Institucional | Correo Institucional | RUT Oficial | Contraseña | Código MFA | Privilegios Principales |
@@ -364,6 +376,9 @@ A partir del análisis exhaustivo del protocolo de pruebas y benchmark técnico,
 
 ### P4: ¿Cómo cumple el sistema con la Ley N° 21.719 de Protección de Datos Personales?
 > **Respuesta Técnica:** "El sistema adopta el principio de *Privacy by Design*. Implementa de forma nativa los Derechos ARCO: rectificación de datos (`PATCH /usuarios/<id>/`) y supresión/cancelación segura de cuentas (`DELETE /usuarios/<id>/`). Además, las contraseñas se almacenan mediante salteado irreversible PBKDF2-SHA256 con directiva `write_only: True` para evitar fugas en la API, y todo acceso o mutación queda firmado en la bitácora inmutable bajo el principio de responsabilidad proactiva (*Accountability*)."
+
+### P5: ¿Por qué la primera petición de inicio de sesión tras horas de inactividad puede tardar unos segundos en responder?
+> **Respuesta Técnica:** "Para efectos académicos y de evaluación, el backend está desplegado en una capa gratuita (*Free Tier*) de Render. Esta modalidad implementa una política de optimización energética de suspensión de contenedores (*spin-down*) tras 15 minutos sin tráfico. Al recibir la primera petición, el contenedor realiza un arranque en frío (*Cold Start*), inicializando el runtime de Python, el servidor Gunicorn y el pool de conexiones seguras hacia Supabase y MongoDB Atlas (~30-50 segundos). Una vez activo, el sistema opera con latencias ultra-bajas (< 50 ms). En un entorno bancario real de nuam, la arquitectura se dimensiona sobre clústeres reservados de alta disponibilidad sin suspensión (AWS ECS Fargate o Kubernetes)."
 
 ---
 *nuam EXCHANGE GROUP — Monitoreo en tiempo real de calificaciones tributarias, dividendos y consistencia normativa DJ 1949/1922.*
