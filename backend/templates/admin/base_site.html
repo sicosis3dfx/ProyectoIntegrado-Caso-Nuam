@@ -1,0 +1,198 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block branding %}
+<div id="site-name">
+    <a href="{% url 'admin:index' %}" style="display: inline-flex; align-items: center; gap: 12px; text-decoration: none; vertical-align: middle;">
+        <img src="https://proyecto-integrado-caso-nuam.vercel.app/nuam-icon.png"
+             onerror="this.onerror=null; this.src='https://proyecto-integrado-caso-nuam.vercel.app/favicon.png';"
+             alt="nuam logo"
+             style="height: 38px; width: 38px; object-fit: contain; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.3); background-color: #0f172a;" />
+        <span style="display: inline-flex; flex-direction: column; text-align: left; line-height: 1.15;">
+            <span style="font-weight: 800; font-size: 1.2rem; letter-spacing: -0.02em; color: #f8fafc;">
+                nuam <span style="font-size: 0.72rem; font-weight: 700; color: #f97316; letter-spacing: 0.06em;">EXCHANGE GROUP</span>
+            </span>
+            <span style="font-size: 0.78rem; font-weight: 400; color: #94a3b8;">
+                Mantenedor de Dividendos y Factores Tributarios
+            </span>
+        </span>
+    </a>
+</div>
+{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+  /* ==========================================================================
+     PALETA CORPORATIVA nuam EXCHANGE GROUP — MODO CLARO & MODO OSCURO
+     ========================================================================== */
+
+  /* MODO CLARO (Default / [data-theme="light"]) */
+  :root, [data-theme="light"] {
+    --primary: #0f172a;
+    --secondary: #1e293b;
+    --accent: #f97316;
+    --primary-fg: #ffffff;
+    --body-fg: #1e293b;
+    --body-bg: #f8fafc;
+    --body-quiet-color: #64748b;
+    --header-color: #ffffff;
+    --header-bg: #0f172a;
+    --header-branding-color: #ffffff;
+    --header-link-color: #f97316;
+    --button-bg: #f97316;
+    --button-hover-bg: #ea580c;
+    --button-fg: #ffffff;
+    --breadcrumbs-link-fg: #f97316;
+    --link-fg: #2563eb;
+    --link-hover-color: #ea580c;
+    --link-selected-fg: #f97316;
+    --border-color: #e2e8f0;
+    --card-bg: #ffffff;
+  }
+
+  /* MODO OSCURO (Preferido / [data-theme="dark"]) */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --primary: #1e293b;
+      --secondary: #0f172a;
+      --accent: #f97316;
+      --primary-fg: #f8fafc;
+      --body-fg: #f1f5f9;
+      --body-bg: #0b0f19;
+      --body-quiet-color: #94a3b8;
+      --header-color: #f8fafc;
+      --header-bg: #0f172a;
+      --header-branding-color: #f8fafc;
+      --header-link-color: #f97316;
+      --button-bg: #f97316;
+      --button-hover-bg: #ea580c;
+      --button-fg: #ffffff;
+      --breadcrumbs-link-fg: #f97316;
+      --link-fg: #38bdf8;
+      --link-hover-color: #f97316;
+      --link-selected-fg: #f97316;
+      --darkened-bg: #1e293b;
+      --border-color: #334155;
+      --card-bg: #111827;
+    }
+  }
+
+  [data-theme="dark"] {
+    --primary: #1e293b !important;
+    --secondary: #0f172a !important;
+    --accent: #f97316 !important;
+    --primary-fg: #f8fafc !important;
+    --body-fg: #f1f5f9 !important;
+    --body-bg: #0b0f19 !important;
+    --body-quiet-color: #94a3b8 !important;
+    --header-color: #f8fafc !important;
+    --header-bg: #0f172a !important;
+    --header-branding-color: #f8fafc !important;
+    --header-link-color: #f97316 !important;
+    --button-bg: #f97316 !important;
+    --button-hover-bg: #ea580c !important;
+    --button-fg: #ffffff !important;
+    --breadcrumbs-link-fg: #f97316 !important;
+    --link-fg: #38bdf8 !important;
+    --link-hover-color: #f97316 !important;
+    --link-selected-fg: #f97316 !important;
+    --darkened-bg: #1e293b !important;
+    --border-color: #334155 !important;
+    --card-bg: #111827 !important;
+  }
+
+  /* ==========================================================================
+     ESTILOS ESPECÍFICOS PARA ENCABEZADO, LOGIN Y CONTROLES
+     ========================================================================== */
+
+  /* Encabezado Principal */
+  #header {
+    background: #0f172a !important;
+    border-bottom: 2px solid #f97316 !important;
+    padding: 10px 20px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+  }
+
+  #user-tools a {
+    color: #cbd5e1 !important;
+    transition: color 0.15s ease !important;
+  }
+  #user-tools a:hover {
+    color: #f97316 !important;
+  }
+
+  /* Caja de Inicio de Sesión */
+  .login #container {
+    border-radius: 14px !important;
+    overflow: hidden !important;
+    border: 1px solid rgba(249, 115, 22, 0.35) !important;
+    box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.6) !important;
+  }
+
+  .login #header {
+    background: #0f172a !important;
+    border-bottom: 2px solid #f97316 !important;
+    padding: 18px 20px !important;
+  }
+
+  /* Botones con Gradiente Naranja nuam */
+  .submit-row input[type="submit"],
+  input[type="submit"].default,
+  .button.default,
+  .button {
+    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%) !important;
+    border: none !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    color: #ffffff !important;
+    padding: 10px 20px !important;
+    transition: all 0.2s ease !important;
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.35) !important;
+    cursor: pointer !important;
+  }
+
+  .submit-row input[type="submit"]:hover,
+  input[type="submit"].default:hover,
+  .button.default:hover {
+    background: linear-gradient(135deg, #fb923c 0%, #f97316 100%) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 16px rgba(249, 115, 22, 0.5) !important;
+  }
+
+  /* Campos de Formulario */
+  input[type="text"]:focus,
+  input[type="password"]:focus,
+  input[type="email"]:focus,
+  select:focus,
+  textarea:focus {
+    border-color: #f97316 !important;
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.25) !important;
+    outline: none !important;
+  }
+
+  /* Módulos y Tablas */
+  .module caption,
+  .inline-group h2 {
+    background: #1e293b !important;
+    color: #f8fafc !important;
+    border-left: 3px solid #f97316 !important;
+    font-weight: 600 !important;
+  }
+
+  .breadcrumbs {
+    background: #0f172a !important;
+    border-bottom: 1px solid #334155 !important;
+    color: #94a3b8 !important;
+  }
+
+  .breadcrumbs a {
+    color: #cbd5e1 !important;
+  }
+  .breadcrumbs a:hover {
+    color: #f97316 !important;
+  }
+</style>
+{% endblock %}
