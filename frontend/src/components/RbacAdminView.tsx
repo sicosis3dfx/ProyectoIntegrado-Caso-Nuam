@@ -622,11 +622,11 @@ export const RbacAdminView: React.FC = () => {
                     {nuevoRut && (
                       <div className="mt-1" style={{ fontSize: '0.75rem' }}>
                         {validarRutChileno(nuevoRut) ? (
-                          <span className="text-success font-semibold">✅ RUT válido (Módulo 11 CMF)</span>
+                          <span className="text-success font-semibold">✅ RUT válido</span>
                         ) : nuevoRut.replace(/[^0-9kK]/g, '').length >= 8 ? (
-                          <span className="text-warning">⚠️ Dígito verificador no coincide con Módulo 11</span>
+                          <span className="text-warning">⚠️ RUT o dígito verificador incorrecto</span>
                         ) : (
-                          <span className="text-muted">Escriba los números sin puntos ni guion</span>
+                          <span className="text-muted">Ingrese el RUT completo con su dígito verificador</span>
                         )}
                       </div>
                     )}
