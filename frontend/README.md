@@ -19,12 +19,14 @@
 ### 📱 Características Principales y Modo Responsivo
 1. **Menú Hamburguesa Móvil (☰ / ✕):** Navegación off-canvas deslizante en pantallas `<= 768px` con telón oscuro (*backdrop*).
 2. **Vista Dual (Lista vs. Cuadros):** Componente `ViewToggle` para alternar entre tabla tradicional y tarjetas táctiles `CertificateCard`.
-3. **Loader Flotante Corporativo (`FloatingLoader`):** Ubicado en la cabecera central con el imagotipo oficial de nuam y spinner circular naranja-rojo reactivo a cada petición API.
-4. **Hooks Personalizados:**
+3. **Loader Flotante Corporativo (`FloatingLoader`):** Ubicado en la cabecera central con el imagotipo oficial de nuam y spinner circular naranja-rojo reactivo a cada petición API, con envoltura de texto adaptativa en móviles.
+4. **Modal Preventivo de Confirmación de Ingesta Masiva:** Intercepta la carga o arrastre de archivos CSV con la estética glassmorphism del `FloatingLoader`. Centrado matemáticamente en pantalla (`max-width: 620px`), muestra los metadatos completos (nombre, formato, tamaño y operador sin recortes) y se adapta de forma 100% responsiva apilando verticalmente los datos y botones de acción en pantallas móviles ($\le 480px$).
+5. **Alternancia de Contraseña (Ojo):** Botón con iconos SVG de visibilidad en el login para verificar la clave ingresada sin alterar el espaciado del formulario.
+6. **Hooks Personalizados:**
    * `useIntersection`: Carga y animación suave de tarjetas a medida que entran en la pantalla.
    * `useWindowScroll`: Topbar fijo (*sticky*) con desenfoque dinámico (`backdrop-filter: blur(12px)`) durante el desplazamiento en celulares.
-5. **Formulario con Auto-formato de RUT:** Detección de teclado numérico con formateo instantáneo a `XX.XXX.XXX-X` y validación de dígito verificador Módulo 11 (CMF).
-6. **Checklist Interactivo de Contraseñas:** Validación visual en tiempo real de políticas reforzadas ISO/IEC 27001 (mayúscula, minúscula, número y símbolo especial).
+7. **Formulario con Auto-formato de RUT:** Detección de teclado numérico con formateo instantáneo a `XX.XXX.XXX-X` y validación de dígito verificador Módulo 11 (CMF).
+8. **Checklist Interactivo de Contraseñas:** Validación visual en tiempo real de políticas reforzadas ISO/IEC 27001 (mayúscula, minúscula, número y símbolo especial).
 
 ---
 

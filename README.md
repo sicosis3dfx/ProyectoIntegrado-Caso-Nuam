@@ -51,7 +51,9 @@ La interfaz web cubre el **100% de los procesos de negocio exigidos** bajo dise�
 ### 1.3. Adaptabilidad Móvil y Experiencia UI/UX
 * **Menú Hamburguesa (☰ / ✕):** En dispositivos móviles (`<= 768px`), la navegación se transforma en un cajón lateral deslizante (*off-canvas drawer*) con fondo translúcido (*backdrop*), optimizando el espacio visual.
 * **Vista Dual Lista / Cuadros (`ViewToggle`):** Tanto en el Dashboard como en el Repositorio, el usuario puede alternar entre la tabla tradicional de datos y una vista de tarjetas independientes (`CertificateCard`), ideal para pantallas táctiles.
-* **Notificación Flotante con Branding nuam (`FloatingLoader`):** Ubicada en la parte superior central con animación suave de descenso, imagotipo de nuam y spinner circular en degradado naranja-rojo (`#f97316` / `#ef4444`).
+* **Notificación Flotante con Branding nuam (`FloatingLoader`):** Ubicada en la parte superior central con animación suave de descenso, imagotipo de nuam y spinner circular en degradado naranja-rojo (`#f97316` / `#ef4444`). Cuenta con ajuste multilínea automático para pantallas móviles.
+* **Modal Preventivo de Confirmación de Ingesta Masiva:** Diálogo modal perfectamente centrado (`max-width: 620px`) con la misma estética de vidrio oscuro (`backdrop-filter: blur(20px)`) y spinner corporativo nuam. Intercepta la acción de arrastrar o seleccionar archivos CSV, mostrando los metadatos completos (nombre, formato, tamaño y operador sin recortes). En smartphones ($\le 480px$), los datos se apilan verticalmente y los botones de acción se extienden al 100% para máxima comodidad ergonómica.
+* **Botón de Visibilidad de Contraseña (Ojo):** Alternancia dinámica en el formulario de login para visualizar u ocultar credenciales con iconos SVG accesibles y alineación perfecta.
 * **Skeleton Shimmer Loading:** Esqueletos de carga con gradiente animado en tablas para evitar saltos de interfaz durante la consulta a la base de datos en la nube.
 
 ---
