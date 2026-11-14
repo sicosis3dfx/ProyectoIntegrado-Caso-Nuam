@@ -64,6 +64,7 @@ export function App() {
           <Navbar
             usuario={usuario}
             onLogout={handleLogout}
+            onNavigateHome={() => setCurrentView('dashboard')}
             onToggleMobileMenu={() => setMobileMenuOpen(prev => !prev)}
             isMobileMenuOpen={mobileMenuOpen}
           />

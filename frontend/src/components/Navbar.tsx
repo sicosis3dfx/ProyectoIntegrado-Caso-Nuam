@@ -6,6 +6,7 @@ import { useWindowScroll } from '../hooks/useWindowScroll';
 interface NavbarProps {
   usuario: UsuarioAutenticado | null;
   onLogout: () => void;
+  onNavigateHome?: () => void;
   onToggleMobileMenu?: () => void;
   isMobileMenuOpen?: boolean;
 }
@@ -13,10 +14,18 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({
   usuario,
   onLogout,
+  onNavigateHome,
   onToggleMobileMenu,
   isMobileMenuOpen
 }) => {
   const hasScrolled = useWindowScroll();
+
+  const handleLogoClick = () => {
+    if (onNavigateHome) {
+      onNavigateHome();
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <header className={`nuam-topbar ${hasScrolled ? 'is-scrolled' : ''}`}>
@@ -32,13 +41,19 @@ export const Navbar: React.FC<NavbarProps> = ({
             {isMobileMenuOpen ? '✕' : '☰'}
           </button>
         )}
-        <div className="logo-badge" style={{ flexDirection: 'row', alignItems: 'center', gap: '0.75rem' }}>
+        <button
+          type="button"
+          className="logo-badge logo-badge-btn"
+          onClick={handleLogoClick}
+          title="Ir al inicio (Dashboard de Cierre Fiscal)"
+          aria-label="Ir al inicio - nuam EXCHANGE GROUP"
+        >
           <img src={nuamLogo} alt="nuam" style={{ height: '36px', width: '36px', objectFit: 'contain', borderRadius: '6px' }} />
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <span className="logo-text" style={{ lineHeight: '1.1' }}>nuam</span>
             <span className="logo-subtext">EXCHANGE GROUP</span>
           </div>
-        </div>
+        </button>
         <div className="system-pill">
           <span className="system-title">Mantenedor de Dividendos y Factores Tributarios</span>
           <span className="env-badge">Año Tributario 2026</span>
