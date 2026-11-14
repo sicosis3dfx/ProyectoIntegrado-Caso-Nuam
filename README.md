@@ -215,7 +215,7 @@ Aislamiento estricto de roles mediante decoradores REST `@rol_requerido`:
 El desarrollo refleja una división de responsabilidades clara y trabajo colaborativo registrado en el historial de Git:
 
 ```
-feature/FrontEnd (Martín Tapia)  ───────┐
+feature/FrontEnd (Martín Tapia) ─────────┐
                                          ├─> Pull Request #1 (Merged) ─> main (Despliegue)
 feature/Backend-DB (Angelo Zamora) ──────┘
 ```
