@@ -346,7 +346,7 @@ LT-2026-0048,97.004.000-5,2026,2000000000.00`;
               <div className="confirm-file-details">
                 <div className="file-detail-row">
                   <span className="detail-label">📄 Archivo:</span>
-                  <span className="detail-value font-mono font-bold text-accent" title={archivoPendiente.name}>
+                  <span className="detail-value font-mono font-bold text-accent detail-filename" title={archivoPendiente.name}>
                     {archivoPendiente.name}
                   </span>
                 </div>
