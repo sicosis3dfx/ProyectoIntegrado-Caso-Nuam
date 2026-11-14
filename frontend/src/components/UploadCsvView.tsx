@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import type { UsuarioAutenticado, UploadResponseSuccess, UploadResponseError } from '../types';
 import { api } from '../services/api';
+import nuamLogo from '../assets/nuam-logo.png';
 
 interface UploadCsvViewProps {
   usuario: UsuarioAutenticado;
@@ -10,6 +11,8 @@ interface UploadCsvViewProps {
 export const UploadCsvView: React.FC<UploadCsvViewProps> = ({ usuario, onSuccess }) => {
   const [dragOver, setDragOver] = useState(false);
   const [archivoSeleccionado, setArchivoSeleccionado] = useState<File | null>(null);
+  const [archivoPendiente, setArchivoPendiente] = useState<File | null>(null);
+  const [mostrarConfirmacion, setMostrarConfirmacion] = useState(false);
   const [progreso, setProgreso] = useState<number | null>(null);
   const [faseBpmn, setFaseBpmn] = useState<string>('');
   const [resultadoExitoso, setResultadoExitoso] = useState<UploadResponseSuccess | null>(null);
@@ -18,6 +21,34 @@ export const UploadCsvView: React.FC<UploadCsvViewProps> = ({ usuario, onSuccess
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const esAuditor = usuario.rol === 'Auditor nuam';
+
+  const formatearTamano = (bytes: number): string => {
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+  };
+
+  const handleSolicitarCarga = (file: File) => {
+    if (esAuditor) return;
+    setArchivoPendiente(file);
+    setMostrarConfirmacion(true);
+  };
+
+  const handleCancelarCarga = () => {
+    setArchivoPendiente(null);
+    setMostrarConfirmacion(false);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
+  const handleConfirmarCarga = () => {
+    if (!archivoPendiente) return;
+    const file = archivoPendiente;
+    setArchivoSeleccionado(file);
+    setMostrarConfirmacion(false);
+    handleProcesar(file);
+  };
 
   // Plantillas CSV de prueba integradas
   const CSV_VALIDO = `folio_certificado,rut_emisor,razon_social,anio_tributario,fecha_pago,monto_total_bruto,monto_afecto,monto_exento,monto_credito
@@ -139,8 +170,7 @@ LT-2026-0048,97.004.000-5,2026,2000000000.00`;
           if (esAuditor) return;
           if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
             const file = e.dataTransfer.files[0];
-            setArchivoSeleccionado(file);
-            handleProcesar(file);
+            handleSolicitarCarga(file);
           }
         }}
         onClick={() => {
@@ -155,8 +185,7 @@ LT-2026-0048,97.004.000-5,2026,2000000000.00`;
           onChange={(e) => {
             if (e.target.files && e.target.files.length > 0) {
               const file = e.target.files[0];
-              setArchivoSeleccionado(file);
-              handleProcesar(file);
+              handleSolicitarCarga(file);
             }
           }}
         />
@@ -291,6 +320,81 @@ LT-2026-0048,97.004.000-5,2026,2000000000.00`;
               </div>
             </div>
           )}
+        </div>
+      )}
+
+      {/* Modal de Confirmación Previa a la Ingesta Masiva */}
+      {mostrarConfirmacion && archivoPendiente && (
+        <div className="modal-backdrop confirm-modal-backdrop" onClick={handleCancelarCarga} role="dialog" aria-modal="true">
+          <div className="nuam-confirm-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="confirm-modal-header">
+              <div className="loader-icon-container">
+                <div className="loader-spinner-ring" />
+                <img src={nuamLogo} alt="nuam" className="loader-nuam-img" />
+              </div>
+              <div className="confirm-header-content">
+                <span className="confirm-brand-tag">nuam EXCHANGE · Control de Ingesta</span>
+                <h3 className="confirm-title">¿Desea cargar esta nómina de dividendos?</h3>
+              </div>
+            </div>
+
+            <div className="confirm-modal-body">
+              <p className="confirm-question-desc">
+                Se ha detectado un nuevo archivo preparado para ingesta masiva. Confirme los metadatos técnicos antes de iniciar las compuertas de validación fiscal (DJ 1949):
+              </p>
+
+              <div className="confirm-file-details">
+                <div className="file-detail-row">
+                  <span className="detail-label">📄 Archivo:</span>
+                  <span className="detail-value font-mono font-bold text-accent" title={archivoPendiente.name}>
+                    {archivoPendiente.name}
+                  </span>
+                </div>
+                <div className="file-detail-row">
+                  <span className="detail-label">🏷️ Formato:</span>
+                  <span className="detail-value font-semibold">
+                    {archivoPendiente.name.toLowerCase().endsWith('.csv') ? 'Nómina Delimitada (.csv)' : (archivoPendiente.type || 'Documento de Datos')}
+                  </span>
+                </div>
+                <div className="file-detail-row">
+                  <span className="detail-label">⚖️ Tamaño:</span>
+                  <span className="detail-value font-mono">
+                    {formatearTamano(archivoPendiente.size)}
+                  </span>
+                </div>
+                <div className="file-detail-row">
+                  <span className="detail-label">👤 Operador:</span>
+                  <span className="detail-value">
+                    {usuario.nombre} <span className="text-muted">({usuario.rol})</span>
+                  </span>
+                </div>
+              </div>
+
+              <div className="confirm-security-note">
+                <span className="note-icon">🛡️</span>
+                <span>
+                  Al confirmar, el lote ingresará a la <strong>Compuerta 1 (Sintaxis)</strong> y <strong>Compuerta 2 (Consistencia Fiscal)</strong>, registrándose la huella SHA-256 en <code>TB_AUDIT_LOGS</code>.
+                </span>
+              </div>
+            </div>
+
+            <div className="confirm-modal-actions">
+              <button
+                type="button"
+                className="btn-confirm-cancel"
+                onClick={handleCancelarCarga}
+              >
+                ✕ No, Cancelar
+              </button>
+              <button
+                type="button"
+                className="btn-confirm-accept"
+                onClick={handleConfirmarCarga}
+              >
+                ✓ Sí, Ingestar Nómina
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>

@@ -90,6 +90,7 @@ Para labores de inspección de modelos ORM, tablas físicas y revisión de bases
 * **Vista Dual Lista / Cuadros (`ViewToggle`):** Selector para alternar entre tabla de datos y tarjetas táctiles independientes (`CertificateCard`).
 * **Botón de Ojo en Login:** Alternancia dinámica para ver/ocultar contraseña con iconos SVG accesibles y sin desalineación tipográfica.
 * **Notificación Flotante Responsiva (`FloatingLoader`):** Ubicada en la parte superior central con imagotipo nuam y spinner circular. Cuenta con envoltura multilínea adaptativa (`white-space: normal`, `word-break: break-word`) para que el texto nunca desborde el banner en pantallas móviles.
+* **Modal Preventivo de Confirmación de Ingesta:** Diálogo modal con la misma estética de vidrio oscuro y spinner circular del `FloatingLoader` que intercepta la subida o arrastre de archivos CSV. Presenta los metadatos técnicos (nombre de archivo, formato, tamaño y operador) con opciones explícitas (*"No, Cancelar"* / *"Sí, Ingestar Nómina"*), eliminando riesgos de procesamiento involuntario de nóminas no deseadas.
 * **TopBar Fijo Dinámico:** Utiliza `useWindowScroll` para volverse *sticky* con desenfoque de fondo (`backdrop-filter: blur(12px)`) durante el scroll en celulares.
 * **Skeleton Shimmer Loading:** Animación de carga fluida en tablas para una percepción de velocidad instantánea.
 * **Limpieza Institucional:** Eliminación de nomenclaturas académicas (`CU-01`, `CU-07`, etc.) sustituidas por terminología bancaria formal.
