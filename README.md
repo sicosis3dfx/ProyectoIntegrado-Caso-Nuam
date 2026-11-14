@@ -247,6 +247,7 @@ El ecosistema se encuentra **100% operativo en producción cloud** con persisten
 > * **Operatividad Posterior:** Una vez completado este primer arranque en frío, el contenedor permanece caliente y todas las peticiones posteriores responden en **tiempo real con latencias de 1 a 25 milisegundos**.
 > * **Recomendación para Demostración:** Se recomienda realizar una petición preliminar al endpoint de salud [`/api/v1/salud/`](https://proyectointegrado-caso-nuam.onrender.com/api/v1/salud/) unos 5 minutos antes del inicio de la presentación para garantizar que el contenedor se encuentre activo y en caliente.
 > * **Enrutamiento de Raíz (Redirección Automática HTTP 302):** Si un evaluador o usuario accede directamente a la URL raíz del servidor backend (`https://proyectointegrado-caso-nuam.onrender.com/`), Django ejecuta una redirección automática hacia la SPA en Vercel, evitando errores 404 o exposición de interfaces de depuración y asegurando una navegación unificada.
+> * **Alias de Enrutamiento Inverso en Vercel (`/admin`):** Si se navega a [`https://proyecto-integrado-caso-nuam.vercel.app/admin`](https://proyecto-integrado-caso-nuam.vercel.app/admin), la infraestructura perimetral de Vercel (`vercel.json`) y la SPA redirigen automáticamente al panel de administración de Django en Render (`https://proyectointegrado-caso-nuam.onrender.com/admin/`), garantizando una navegación continua sin errores de ruta.
 
 ---
 
@@ -260,7 +261,8 @@ El ecosistema se encuentra **100% operativo en producción cloud** con persisten
 
 #### 🛡️ Acceso de Superusuario al Backoffice (Django Admin)
 Para labores de inspección directa de modelos ORM, tablas físicas en 3FN y auditoría técnica de base de datos:
-* **URL de Acceso Directo:** [https://proyectointegrado-caso-nuam.onrender.com/admin/](https://proyectointegrado-caso-nuam.onrender.com/admin/)
+* **URL de Acceso Directo (Render):** [https://proyectointegrado-caso-nuam.onrender.com/admin/](https://proyectointegrado-caso-nuam.onrender.com/admin/)
+* **URL Alternativa vía Vercel:** [https://proyecto-integrado-caso-nuam.vercel.app/admin](https://proyecto-integrado-caso-nuam.vercel.app/admin) *(Redirige de forma automática al backoffice)*
 * **Nombre de Usuario:** `sicosis3dfx`
 * **Contraseña:** `Ponsill@@1`
 * **Características del Panel Personalizado:**

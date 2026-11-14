@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>nuam EXCHANGE — Calificaciones Tributarias</title>
     <meta name="description" content="Plataforma Centralizada de Calificaciones Tributarias y Dividendos - nuam Exchange Group (Chile · Perú · Colombia)" />
+    <script>
+      // Redirección inmediata hacia el panel de administración Django si se accede por /admin
+      if (window.location.pathname === '/admin' || window.location.pathname === '/admin/' || window.location.pathname.startsWith('/admin/')) {
+        window.location.replace('https://proyectointegrado-caso-nuam.onrender.com/admin/');
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

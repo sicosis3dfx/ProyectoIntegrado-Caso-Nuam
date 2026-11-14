@@ -43,3 +43,10 @@ npm run dev
 
 La aplicación se ejecutará en: `http://localhost:5173/`
 *(Apunta automáticamente al backend en Render mediante `frontend/.env`)*.
+
+---
+
+### ☁️ Despliegue en Vercel y Enrutamiento Perimetral
+* **URL de Producción:** [https://proyecto-integrado-caso-nuam.vercel.app](https://proyecto-integrado-caso-nuam.vercel.app)
+* **Redirección Perimetral (`/admin`):** Configurada en `vercel.json` y `index.html` para que cualquier petición hacia `/admin` o `/admin/` sea redirigida de forma inmediata al panel de administración de Django en Render (`https://proyectointegrado-caso-nuam.onrender.com/admin/`).
+* **Reglas SPA:** Todas las demás rutas de navegación se canalizan limpiamente hacia `/index.html` evitando errores 404 en recarga de página.
