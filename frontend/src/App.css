@@ -1576,6 +1576,8 @@
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
+  min-width: 0;
+  flex: 1;
 }
 
 .loader-brand-tag {
@@ -1849,13 +1851,34 @@
     min-width: 1120px;
   }
 
-  /* Notificación Flotante Centrada en Móviles */
+  /* Notificación Flotante Centrada y Adaptativa en Móviles */
   .nuam-floating-loader {
     top: 0.75rem;
-    width: 92%;
-    max-width: 360px;
+    width: calc(100% - 1.5rem);
+    max-width: 420px;
     padding: 0.65rem 0.95rem;
+    gap: 0.75rem;
+  }
+
+  .loader-icon-container {
+    width: 34px;
+    height: 34px;
+  }
+
+  .loader-nuam-img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .loader-brand-tag {
+    font-size: 0.6rem;
+  }
+
+  .loader-text {
     font-size: 0.8rem;
+    line-height: 1.25;
+    white-space: normal;
+    word-break: break-word;
   }
 }
 
