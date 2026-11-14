@@ -10,8 +10,8 @@
 * **Asignatura:** Proyecto Integrado
 * **Docente Guía:** Macarena Angulo Olguín
 * **Equipo de Desarrollo:**
-  * **Angelo Alberto Zamora Romero** *(Arquitectura de Software, Backend REST, Seguridad Criptográfica y Base de Datos)*
-  * **Martín Ignacio Tapia Jaramillo** *(Optimización UI/UX, Componentes React, Hooks de Visibilidad y Vista en Cuadros)*
+  * **Angelo Alberto Zamora Romero** *(Arquitectura Frontend SPA, Componentes React 19 + TypeScript, Optimización UI/UX y Diseño Responsivo)*
+  * **Martín Ignacio Tapia Jaramillo** *(Arquitectura Backend REST, Framework Django 5.2, Seguridad Criptográfica y Base de Datos en 3FN)*
   * **Vicente Sagredo** *(Diseño de Casos de Prueba, Control de Calidad QA, Protocolo de Validación y Documentación)*
 * **Período Académico:** Cuarto Semestre 2026 — Evaluación 3
 * **Fecha de Consolidación:** 13 de Noviembre de 2026

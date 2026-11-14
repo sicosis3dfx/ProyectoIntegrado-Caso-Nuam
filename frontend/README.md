@@ -3,7 +3,8 @@
 
 * **Asignatura:** Proyecto Integrado
 * **Docente:** Macarena Angulo Olguín
-* **Desarrolladores:** Vicente Sagredo, Martín Tapia, Angelo Zamora
+* **Desarrollador Principal Frontend:** Angelo Alberto Zamora Romero
+* **Equipo del Proyecto:** Martín Ignacio Tapia Jaramillo (Backend & DB), Vicente Sagredo (QA & Pruebas)
 * **Institución:** INACAP — Segundo Semestre 2026
 
 ---

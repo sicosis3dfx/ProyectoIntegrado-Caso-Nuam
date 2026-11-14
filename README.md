@@ -14,8 +14,8 @@
 * **Asignatura:** Proyecto Integrado - Ingeniería en Informática  
 * **Docente Guía:** Macarena Angulo Olguín
 * **Equipo de Desarrollo:**
-  * **Angelo Alberto Zamora Romero** *(Arquitectura de Software, Backend REST, Seguridad Criptográfica y Base de Datos)*
-  * **Martín Ignacio Tapia Jaramillo** *(Optimización UI/UX, Componentes React, Hooks de Visibilidad y Vista en Cuadros)*
+  * **Angelo Alberto Zamora Romero** *(Arquitectura Frontend SPA, Componentes React 19 + TypeScript, Optimización UI/UX y Diseño Responsivo)*
+  * **Martín Ignacio Tapia Jaramillo** *(Arquitectura Backend REST, Framework Django 5.2, Seguridad Criptográfica y Base de Datos en 3FN)*
   * **Vicente Sagredo** *(Diseño de Casos de Prueba, Control de Calidad QA, Protocolo de Validación y Documentación)*
 * **Período Académico:** Cuarto Semestre 2026
 
@@ -216,13 +216,13 @@ Aislamiento estricto de roles mediante decoradores REST `@rol_requerido`:
 El desarrollo refleja una división de responsabilidades clara y trabajo colaborativo registrado en el historial de Git:
 
 ```
-feature/FrontEnd (Martín Tapia) ─────────┐
+feature/FrontEnd (Angelo Zamora) ────────┐
                                          ├─> Pull Request #1 (Merged) ─> main (Despliegue)
-feature/Backend-DB (Angelo Zamora) ──────┘
+feature/Backend-DB (Martín Tapia) ───────┘
 ```
 
-* **Angelo Zamora:** Arquitectura backend Django 5.2, motor de cálculo `Decimal`, persistencia en Supabase PostgreSQL, autenticación JWT/MFA, compuertas BPMN y seguridad ISO 27001.
-* **Martín Tapia:** Optimización UI/UX, arquitectura de componentes React 19 + TypeScript, hooks personalizados (`useIntersection`, `useWindowScroll`), diseño responsivo móvil y vista en tarjetas `CertificateCard`.
+* **Angelo Zamora:** Arquitectura Frontend Web (SPA) React 19 + TypeScript 5.8, diseño modular UI/UX en modo oscuro, hooks personalizados (`useIntersection`, `useWindowScroll`), diseño adaptativo móvil (menú hamburguesa), vista dual en tarjetas `CertificateCard`, diálogo preventivo de confirmación y micro-footer institucional.
+* **Martín Tapia:** Arquitectura Backend REST Django 5.2, motor de cálculo bancario `Decimal`, diseño relacional en 3FN en Supabase PostgreSQL, persistencia de auditoría inmutable en MongoDB Atlas, autenticación JWT/MFA, compuertas de decisión BPMN 2.0 y seguridad ISO/IEC 27001.
 * **Vicente Sagredo:** Diseño y ejecución de la suite de pruebas unitarias (`apps.core.tests`), benchmarking de latencia, protocolo QA ISO 29119 y documentación técnica.
 
 ---
