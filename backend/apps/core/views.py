@@ -438,6 +438,19 @@ class UsuariosListCreateView(APIView):
 
         usuario = serializer.save()
         usuario.cambiar_contrasena(password_raw)
+
+        AuditAlertsService.registrar_evento(
+            usuario=request.user,
+            accion="CREACION_USUARIO_RBAC",
+            detalles_extra={
+                'usuario_creado_rut': usuario.rut,
+                'usuario_creado_email': usuario.email,
+                'rol': usuario.id_rol.nombre_rol,
+                'corredora': usuario.id_corredora,
+                'estado': usuario.estado
+            }
+        )
+
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
