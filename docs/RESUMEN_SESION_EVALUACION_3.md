@@ -39,17 +39,21 @@ El ecosistema se encuentra **100% operativo en producción cloud** con persisten
 ### 2.1. Cuentas de Negocio para el Portal Web (Vercel)
 Autenticación institucional con validación de rol RBAC, tokens JWT y código MFA de 6 dígitos:
 
-| Rol Institucional | Correo Oficial | RUT Chileno | Contraseña | Código MFA | Privilegios y Alcance Normativo |
+| Rol Institucional | Usuario | Correo Oficial | RUT Oficial | Doble Factor (MFA) | Privilegios y Alcance Normativo |
 | :--- | :--- | :--- | :--- | :---: | :--- |
-| **Operador Corredora** | `operador@larrainvial.cl` | `12.345.678-9` | `Nuam2026!` | `123456` o `📲 OTP` | Carga masiva CSV y validación DJ 1949. **Cierre fiscal bloqueado (HTTP 403 Forbidden por SoD).** |
-| **Auditor nuam** | `auditor@nuam.com` | `9.876.543-2` | `Nuam2026!` | `123456` o `📲 OTP` | Fiscalización regional, verificación SHA-256 y **aprobación/cierre definitivo de lotes fiscales**. Modo lectura en CSV. |
-| **Administrador Plataforma** | `admin@nuam.com` | `11.222.333-4` | `Nuam2026!` | `123456` o `📲 OTP` | Control total, matriz RBAC, gestión de usuarios, depuración de pruebas y configuración institucional. |
+| **Operador Corredora** | **Angelo Corredor** | `angelo@nuam.com` / `operador@larrainvial.cl` | `12.345.678-9` | `123456` o `📲 OTP` | Carga masiva CSV y validación DJ 1949. **Cierre fiscal bloqueado (HTTP 403 Forbidden por SoD).** |
+| **Auditor nuam** | **Martín Auditor** | `martin@nuam.com` / `auditor@nuam.com` | `9.876.543-2` | `123456` o `📲 OTP` | Fiscalización regional, verificación SHA-256 y **aprobación/cierre definitivo de lotes fiscales**. Modo lectura en CSV. |
+| **Administrador Plataforma** | **Vicente Administrador** | `vicente@nuam.com` / `admin@nuam.com` | `11.222.333-4` | `123456` o `📲 OTP` | Control total, matriz RBAC, gestión de usuarios, depuración de pruebas y configuración institucional. |
+
+> [!NOTE]
+> **Gestión de Secretos y Seguridad de Credenciales (ISO/IEC 27001 Control A.9.4.3):**  
+> Siguiendo los estándares internacionales de seguridad DevSecOps y prevención de fuga de credenciales (OWASP A07), las contraseñas confidenciales no se exponen en texto plano en la documentación del repositorio público. Cada cuenta cuenta con su hash salteado irreversible **PBKDF2-SHA256**.
 
 ### 2.2. Cuenta de Superusuario para el Backoffice Técnico (Django Admin)
 Para labores de inspección de modelos ORM, tablas físicas y revisión de bases de datos:
 * **URL de Acceso Directo:** [https://proyectointegrado-caso-nuam.onrender.com/admin/](https://proyectointegrado-caso-nuam.onrender.com/admin/) *(o vía [Vercel /admin](https://proyecto-integrado-caso-nuam.vercel.app/admin))*
 * **Usuario:** `sicosis3dfx`
-* **Contraseña:** `Ponsill@@1`
+* **Autenticación:** Acceso restringido exclusivo mediante credencial institucional de superusuario.
 * **Permisos:** Superusuario y Staff con acceso total a las 6 entidades del sistema.
 
 ---

@@ -255,20 +255,24 @@ El ecosistema se encuentra **100% operativo en producción cloud** con persisten
 
 ---
 
-### 🔑 Credenciales Oficiales de Demostración
+### 🔑 Cuentas Institucionales de Acceso y Demostración
 
-| Rol Institucional | Correo Institucional | RUT Oficial | Contraseña | Código MFA | Privilegios Principales |
+| Rol Institucional | Usuario de Demostración | Correo Oficial | RUT Oficial | Doble Factor (MFA) | Alcance y Privilegios Normativos |
 | :--- | :--- | :--- | :--- | :---: | :--- |
-| **Operador Corredora** | `operador@larrainvial.cl` | `12.345.678-9` | `Nuam2026!` | `123456` o `📲 OTP` | Carga masiva CSV y validación DJ 1949. Cierre de lotes bloqueado (HTTP 403). |
-| **Auditor nuam** | `auditor@nuam.com` | `9.876.543-2` | `Nuam2026!` | `123456` o `📲 OTP` | Fiscalización regional, auditoría SHA-256 y **aprobación/cierre de lotes fiscales**. |
-| **Administrador Plataforma** | `admin@nuam.com` | `11.222.333-4` | `Nuam2026!` | `123456` o `📲 OTP` | Control total, matriz RBAC, gestión de usuarios y depuración de registros de prueba. |
+| **Operador Corredora** | **Angelo Corredor** | `angelo@nuam.com` / `operador@larrainvial.cl` | `12.345.678-9` | `123456` o `📲 OTP` | Ingesta masiva CSV y validación DJ 1949. Cierre de lotes bloqueado (HTTP 403 Forbidden por SoD). |
+| **Auditor nuam** | **Martín Auditor** | `martin@nuam.com` / `auditor@nuam.com` | `9.876.543-2` | `123456` o `📲 OTP` | Fiscalización regional, auditoría SHA-256 y **aprobación/cierre definitivo de lotes fiscales**. |
+| **Administrador Plataforma** | **Vicente Administrador** | `vicente@nuam.com` / `admin@nuam.com` | `11.222.333-4` | `123456` o `📲 OTP` | Control total, matriz RBAC, gestión de usuarios y depuración de registros de prueba. |
+
+> [!NOTE]
+> **Gestión de Secretos y Seguridad de Credenciales (ISO/IEC 27001 Control A.9.4.3):**  
+> Siguiendo los estándares internacionales de seguridad DevSecOps y prevención de fuga de credenciales (OWASP A07), las contraseñas confidenciales no se exponen en texto plano en la documentación del repositorio público. Cada cuenta cuenta con su hash salteado irreversible **PBKDF2-SHA256**.
 
 #### 🛡️ Acceso de Superusuario al Backoffice (Django Admin)
 Para labores de inspección directa de modelos ORM, tablas físicas en 3FN y auditoría técnica de base de datos:
 * **URL de Acceso Directo (Render):** [https://proyectointegrado-caso-nuam.onrender.com/admin/](https://proyectointegrado-caso-nuam.onrender.com/admin/)
 * **URL Alternativa vía Vercel:** [https://proyecto-integrado-caso-nuam.vercel.app/admin](https://proyecto-integrado-caso-nuam.vercel.app/admin) *(Redirige de forma automática al backoffice)*
 * **Nombre de Usuario:** `sicosis3dfx`
-* **Contraseña:** `Ponsill@@1`
+* **Autenticación:** Acceso restringido exclusivo mediante credencial institucional de superusuario.
 * **Características del Panel Personalizado:**
   * **Branding Oficial nuam:** Imagotipo corporativo servido mediante CDN de alta velocidad y tipografía institucional unificada.
   * **Soporte Dual Mode (Modo Claro & Modo Oscuro):** Paleta corporativa con Azul Marino Profundo (`#0f172a`), Azul Pizarra (`#1e293b`) y acentos en Naranja nuam (`#f97316` / `#ea580c`) con alternancia dinámica (☀️ / 🌙).
