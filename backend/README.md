@@ -9,7 +9,7 @@
 ---
 
 ### 🏛️ Arquitectura del Servicio y Stack
-* **Lenguaje:** Python 3.12 / 3.14
+* **Lenguaje:** Python 3.12 / 3.13
 * **Framework:** Django 5.2 LTS + Django REST Framework (DRF)
 * **Motor de Base de Datos:** Supabase PostgreSQL 15 (Transacciones ACID en 3FN vía Session Pooler)
 * **Auditoría Inmutable:** MongoDB Atlas / Persistencia Híbrida con sellado criptográfico SHA-256

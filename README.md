@@ -5,7 +5,7 @@
 [![Production Render](https://img.shields.io/badge/Backend-Render%20Active-blue?style=for-the-badge&logo=render)](https://proyectointegrado-caso-nuam.onrender.com)
 [![Database Supabase](https://img.shields.io/badge/Database-Supabase%20PostgreSQL-3ECF8E?style=for-the-badge&logo=supabase)](https://supabase.com)
 [![Security ISO 27001](https://img.shields.io/badge/Security-ISO%2027001%20%7C%20Ley%2021.719-orange?style=for-the-badge&logo=security)](https://www.bcn.cl/leychile/navegar?idNorma=1209355)
-[![QA Standard ISO 29119](https://img.shields.io/badge/QA%20Standard-ISO%2F举IEC%2029119%20(100%25%20OK)-success?style=for-the-badge)](docs/REPORTE_PRUEBAS_EVALUACION_3.md)
+[![QA Standard ISO 29119](https://img.shields.io/badge/QA%20Standard-ISO%2FIEC%2029119%20(100%25%20OK)-success?style=for-the-badge)](docs/REPORTE_PRUEBAS_EVALUACION_3.md)
 
 ---
 
@@ -232,7 +232,7 @@ El ecosistema se encuentra **100% operativo en producción cloud** con persisten
 | Componente | Proveedor Cloud | URL de Acceso Oficial | Tecnología |
 | :--- | :---: | :--- | :--- |
 | **Frontend Web (SPA)** | **Vercel** | [proyecto-integrado-caso-nuam.vercel.app](https://proyecto-integrado-caso-nuam.vercel.app) | React 19 + TypeScript + Vite |
-| **Backend REST API** | **Render** | [proyectointegrado-caso-nuam.onrender.com](https://proyectointegrado-caso-nuam.onrender.com) *(Redirige a Vercel)* | Python 3.14 + Django 5.2 + DRF |
+| **Backend REST API** | **Render** | [proyectointegrado-caso-nuam.onrender.com](https://proyectointegrado-caso-nuam.onrender.com) *(Redirige a Vercel)* | Python 3.12 / 3.13 + Django 5.2 + DRF |
 | **Panel de Administración (Backoffice)** | **Render** | [proyectointegrado-caso-nuam.onrender.com/admin/](https://proyectointegrado-caso-nuam.onrender.com/admin/) | Django Admin (Branding nuam Dual Mode) |
 | **Base de Datos Relacional** | **Supabase** | `aws-0-sa-east-1.pooler.supabase.com` | PostgreSQL 15 (Session Pooler) |
 | **Auditoría Documental** | **MongoDB Atlas** | Cluster Multi-Cloud Inmutable | MongoDB 7.0 + SHA-256 Hashes |
@@ -245,7 +245,7 @@ El ecosistema se encuentra **100% operativo en producción cloud** con persisten
 > **Comportamiento del Servidor Backend en Capa Gratuita (Free Tier):**
 > * Para efectos de la presente evaluación académica, el backend Django se encuentra alojado bajo el plan gratuito de **Render**, mientras que el frontend opera sobre la red perimetral (CDN global) de **Vercel**.
 > * **Suspensión por Inactividad (*Spin-Down*):** Render suspende temporalmente el contenedor de la aplicación tras **15 minutos sin peticiones HTTP** para optimizar el consumo de recursos de cómputo en la nube.
-> * **Tiempo de Reactivación (*Cold Start*):** Si se accede a la plataforma tras varias horas de reposo, el frontend cargará instantáneamente desde la caché perimetral de Vercel, pero el primer intento de autenticación (`POST /api/v1/login/`) requerirá que Render levante el contenedor Docker, inicialice el entorno Python 3.14, cargue el framework Django y restablezca el pool de conexiones hacia Supabase PostgreSQL y MongoDB Atlas. Este proceso toma entre **30 y 50 segundos**.
+> * **Tiempo de Reactivación (*Cold Start*):** Si se accede a la plataforma tras varias horas de reposo, el frontend cargará instantáneamente desde la caché perimetral de Vercel, pero el primer intento de autenticación (`POST /api/v1/login/`) requerirá que Render levante el contenedor Docker, inicialice el entorno Python 3.12 / 3.13, cargue el framework Django y restablezca el pool de conexiones hacia Supabase PostgreSQL y MongoDB Atlas. Este proceso toma entre **30 y 50 segundos**.
 > * **Operatividad Posterior:** Una vez completado este primer arranque en frío, el contenedor permanece caliente y todas las peticiones posteriores responden en **tiempo real con latencias de 1 a 25 milisegundos**.
 > * **Recomendación para Demostración:** Se recomienda realizar una petición preliminar al endpoint de salud [`/api/v1/salud/`](https://proyectointegrado-caso-nuam.onrender.com/api/v1/salud/) unos 5 minutos antes del inicio de la presentación para garantizar que el contenedor se encuentre activo y en caliente.
 > * **Enrutamiento de Raíz (Redirección Automática HTTP 302):** Si un evaluador o usuario accede directamente a la URL raíz del servidor backend (`https://proyectointegrado-caso-nuam.onrender.com/`), Django ejecuta una redirección automática hacia la SPA en Vercel, evitando errores 404 o exposición de interfaces de depuración y asegurando una navegación unificada.
@@ -358,6 +358,16 @@ Suite de Pruebas Automatizadas (python manage.py test apps.core)
 | `CP-09` | **Detección Automática de Adulteración en BD** | Estado: `ALTERADO_ANOMALÍA` | Estado: `ALTERADO_ANOMALÍA` | 543.23 ms | Hashes discrepantes generan alerta inmediata de fraude. | ✅ **APROBADO** |
 | `CP-10` | **Gestión Exclusiva de Usuarios por Admin** | Admin: HTTP 200 / Operador: HTTP 403 | Admin: HTTP 200 / Operador: HTTP 403 | 4.15 ms | Segregación administrativa confirmada. | ✅ **APROBADO** |
 | `CP-11` | **Benchmark de Estrés (Ingesta Concurrente)** | Latencia promedio < 2000 ms | Latencia media: 761.58 ms | 761.58 ms | Rendimiento transaccional óptimo en la nube. | ✅ **APROBADO** |
+
+### 7.1. Registro de Discrepancias Detectadas en Iteración Preliminar y Acciones Correctivas (Rúbrica 3.1.6.12)
+
+En estricto cumplimiento del criterio de identificación y análisis de discrepancias entre resultados esperados y obtenidos durante el ciclo de aseguramiento de calidad (QA), se documentan las desviaciones detectadas en la **Iteración 1 (Pre-Release)**, sus causas raíz y la solución de ingeniería aplicada para alcanzar el 100% de conformidad en la **Iteración 2 (Release Final)**:
+
+| ID Discrepancia | Caso Afectado | Resultado Esperado (SLA / Norma) | Resultado Obtenido (Iteración 1) | Análisis de Causa Raíz | Corrección Implementada (Resultado Iteración 2) |
+| :--- | :---: | :--- | :--- | :--- | :--- |
+| **`DISC-01`** | `CP-01` (Login Cloud) | Tiempo de respuesta `< 1000 ms` en autenticación inicial. | Latencia de `38.420 ms` en la primera petición tras 20 min de inactividad. | Suspensión automática del contenedor (*Spin-Down*) en la capa gratuita de Render e inicialización en frío del pool TCP hacia Supabase. | Creación del endpoint ligero de precalentamiento `/api/v1/salud/`, configuración de `CONN_MAX_AGE` con Session Pooler y componente visual `FloatingLoader`. Latencia en caliente reducida a **`664.06 ms`**. |
+| **`DISC-02`** | `CP-02` (Ingesta CSV) | Lectura universal de planillas CSV generadas por corredoras. | Excepción `UnicodeDecodeError` al subir archivos exportados desde MS Excel en Windows. | Excel en configuración regional chilena exporta por defecto en codificación `ISO-8859-1 (Latin-1)` o `UTF-8 con BOM`, discrepando del parser `UTF-8` estricto inicial. | Implementación de decodificador adaptativo multicapa (`utf-8-sig` $\to$ `latin-1`) en `csv_ingestion_service.py`, logrando **`3.62 ms`** sin fallos de lectura. |
+| **`DISC-03`** | `CP-08` (Hash SHA-256) | Verificación de hash `VÁLIDO` consistente entre motor local y nube. | Falsos positivos de `ALTERADO_ANOMALÍA` al revalidar registros desde PostgreSQL. | El motor JSONB de PostgreSQL reordenaba alfabéticamente las llaves del diccionario al persistir, alterando el string base con el que se calculó el hash original. | Normalización canónica determinista mediante `json.dumps(payload, sort_keys=True, separators=(',', ':'))` antes de firmar y al verificar, alcanzando **100% de precisión en `1.05 ms`**. |
 
 > Para consultar el informe técnico pormenorizado, revisar el documento anexo: [`docs/REPORTE_PRUEBAS_EVALUACION_3.md`](docs/REPORTE_PRUEBAS_EVALUACION_3.md).
 

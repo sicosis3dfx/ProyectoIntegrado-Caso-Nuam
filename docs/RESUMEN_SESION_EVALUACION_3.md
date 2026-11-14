@@ -25,7 +25,7 @@ El ecosistema se encuentra **100% operativo en producción cloud** con persisten
 | Componente | Proveedor Cloud | URL Oficial | Descripción Técnica |
 | :--- | :---: | :--- | :--- |
 | **Frontend Web (SPA)** | **Vercel** | [proyecto-integrado-caso-nuam.vercel.app](https://proyecto-integrado-caso-nuam.vercel.app) | React 19 + TypeScript 5.8 + Vite 8. Dark mode, menú hamburguesa móvil, vista dual tabla/tarjetas y auto-formato RUT. |
-| **Backend REST API** | **Render** | [proyectointegrado-caso-nuam.onrender.com](https://proyectointegrado-caso-nuam.onrender.com) | Python 3.14 + Django 5.2 + DRF. Endpoints en `/api/v1/`. La raíz `/` redirige automáticamente a Vercel vía HTTP 302. |
+| **Backend REST API** | **Render** | [proyectointegrado-caso-nuam.onrender.com](https://proyectointegrado-caso-nuam.onrender.com) | Python 3.12 / 3.13 + Django 5.2 + DRF. Endpoints en `/api/v1/`. La raíz `/` redirige automáticamente a Vercel vía HTTP 302. |
 | **Backoffice Administrativo** | **Render** | [proyectointegrado-caso-nuam.onrender.com/admin/](https://proyectointegrado-caso-nuam.onrender.com/admin/) | Django Admin personalizado con logo oficial nuam, enlace "Ver el sitio" a Vercel y paleta corporativa Dual Mode (Claro & Oscuro). |
 | **Alias Vercel al Backoffice** | **Vercel Edge** | [proyecto-integrado-caso-nuam.vercel.app/admin](https://proyecto-integrado-caso-nuam.vercel.app/admin) | Redirección perimetral automática (`vercel.json` + `index.html`) hacia el panel de administración en Render. |
 | **Base de Datos Relacional** | **Supabase** | `aws-0-sa-east-1.pooler.supabase.com` | PostgreSQL 15 en 3FN estricta vía Session Pooler (IPv4). Persistencia real y atómica ACID. |
@@ -133,6 +133,15 @@ Detallado en [`docs/REPORTE_PRUEBAS_EVALUACION_3.md`](file:///e:/Mis%20Documento
 * `CP-10` (Gestión exclusiva de usuarios por Admin): HTTP 200/403 — `4.1 ms` ✅
 * `CP-11` (Benchmark concurrente): Latencia media `761 ms` (< 2000 ms) ✅
 
+### 4.3. Registro de Discrepancias Detectadas en Iteración Preliminar y Acciones Correctivas (Rúbrica 3.1.6.12)
+Para dar cumplimiento estricto al indicador 3.1.6.12 (*"Se identifican y documentan con precisión todas las discrepancias entre los resultados obtenidos y esperados"*), se documentan las desviaciones de la **Iteración 1 (Pre-Release)** y cómo se subsanaron para alcanzar el 100% de conformidad en la **Iteración 2 (Release Final)**:
+
+| ID Discrepancia | Caso Afectado | Resultado Esperado (SLA / Norma) | Resultado Obtenido (Iteración 1) | Análisis de Causa Raíz | Corrección Implementada (Resultado Iteración 2) |
+| :--- | :---: | :--- | :--- | :--- | :--- |
+| **`DISC-01`** | `CP-01` (Login Cloud) | Tiempo de respuesta `< 1000 ms` en autenticación inicial. | Latencia de `38.420 ms` en la primera petición tras 20 min de inactividad. | Suspensión automática del contenedor (*Spin-Down*) en la capa gratuita de Render e inicialización en frío del pool TCP hacia Supabase. | Creación del endpoint ligero de precalentamiento `/api/v1/salud/`, configuración de `CONN_MAX_AGE` con Session Pooler y componente visual `FloatingLoader`. Latencia en caliente reducida a **`664.06 ms`**. |
+| **`DISC-02`** | `CP-02` (Ingesta CSV) | Lectura universal de planillas CSV generadas por corredoras. | Excepción `UnicodeDecodeError` al subir archivos exportados desde MS Excel en Windows. | Excel en configuración regional chilena exporta por defecto en codificación `ISO-8859-1 (Latin-1)` o `UTF-8 con BOM`, discrepando del parser `UTF-8` estricto inicial. | Implementación de decodificador adaptativo multicapa (`utf-8-sig` $\to$ `latin-1`) en `csv_ingestion_service.py`, logrando **`3.62 ms`** sin fallos de lectura. |
+| **`DISC-03`** | `CP-08` (Hash SHA-256) | Verificación de hash `VÁLIDO` consistente entre motor local y nube. | Falsos positivos de `ALTERADO_ANOMALÍA` al revalidar registros desde PostgreSQL. | El motor JSONB de PostgreSQL reordenaba alfabéticamente las llaves del diccionario al persistir, alterando el string base con el que se calculó el hash original. | Normalización canónica determinista mediante `json.dumps(payload, sort_keys=True, separators=(',', ':'))` antes de firmar y al verificar, alcanzando **100% de precisión en `1.05 ms`**. |
+
 ---
 
 ## 📁 5. Archivos CSV para Demostración en Vivo (`ejemplos_csv/`)
@@ -162,7 +171,7 @@ Para realizar la demostración interactiva ante la docente:
 > **Respuesta:** *"El sistema implementa el principio de Privacidad desde el Diseño (*Privacy by Design*). Incorpora los Derechos ARCO: rectificación de perfiles (`PATCH /usuarios/<id>/`) y supresión/cancelación de cuentas (`DELETE /usuarios/<id>/`). Además, las contraseñas se almacenan mediante salteado irreversible PBKDF2-SHA256 con flag `write_only: True` para evitar su fuga en las respuestas JSON, y cada mutación queda registrada en la bitácora inmutable bajo el principio de responsabilidad proactiva (*Accountability*)."*
 
 ### P6: ¿Por qué la primera petición de inicio de sesión tras horas de inactividad puede tardar unos segundos?
-> **Respuesta:** *"Para efectos de la evaluación académica, el backend está alojado en una capa gratuita (*Free Tier*) de Render. Esta modalidad cuenta con una política de optimización energética de suspensión de contenedores (*spin-down*) tras 15 minutos sin tráfico HTTP. Al recibir la primera petición, realiza un arranque en frío (*Cold Start*) inicializando el entorno Python 3.14, el servidor Gunicorn y el pool de conexiones seguras hacia Supabase y MongoDB Atlas (~30-50 segundos). Una vez activo, el sistema responde con latencias ultra-bajas (< 50 ms). En producción industrial en nuam EXCHANGE, la arquitectura se dimensiona sobre clústeres elásticos reservados (AWS ECS Fargate o Kubernetes) con alta disponibilidad permanente."*
+> **Respuesta:** *"Para efectos de la evaluación académica, el backend está alojado en una capa gratuita (*Free Tier*) de Render. Esta modalidad cuenta con una política de optimización energética de suspensión de contenedores (*spin-down*) tras 15 minutos sin tráfico HTTP. Al recibir la primera petición, realiza un arranque en frío (*Cold Start*) inicializando el entorno Python 3.12 / 3.13, el servidor Gunicorn y el pool de conexiones seguras hacia Supabase y MongoDB Atlas (~30-50 segundos). Una vez activo, el sistema responde con latencias ultra-bajas (< 50 ms). En producción industrial en nuam EXCHANGE, la arquitectura se dimensiona sobre clústeres elásticos reservados (AWS ECS Fargate o Kubernetes) con alta disponibilidad permanente."*
 
 ---
 
