@@ -438,7 +438,7 @@ export const RbacAdminView: React.FC = () => {
                         >
                           ✏️ Editar
                         </button>
-                        {u.rut !== '11.222.333-4' && u.email !== 'admin@nuam.com' && (
+                        {u.rut !== '11.222.333-4' && u.email !== 'vicente@nuam.com' && u.email !== 'admin@nuam.com' && (
                           <button
                             type="button"
                             className="btn-icon-delete"

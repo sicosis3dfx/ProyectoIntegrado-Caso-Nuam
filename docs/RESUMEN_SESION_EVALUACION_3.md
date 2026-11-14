@@ -43,7 +43,8 @@ Autenticación institucional con validación de rol RBAC, tokens JWT y código M
 | :--- | :--- | :--- | :--- | :---: | :--- |
 | **Operador Corredora** | **Angelo Corredor** | `angelo@nuam.com` / `operador@larrainvial.cl` | `12.345.678-9` | `123456` o `📲 OTP` | Carga masiva CSV y validación DJ 1949. **Cierre fiscal bloqueado (HTTP 403 Forbidden por SoD).** |
 | **Auditor nuam** | **Martín Auditor** | `martin@nuam.com` / `auditor@nuam.com` | `9.876.543-2` | `123456` o `📲 OTP` | Fiscalización regional, verificación SHA-256 y **aprobación/cierre definitivo de lotes fiscales**. Modo lectura en CSV. |
-| **Administrador Plataforma** | **Vicente Administrador** | `vicente@nuam.com` / `admin@nuam.com` | `11.222.333-4` | `123456` o `📲 OTP` | Control total, matriz RBAC, gestión de usuarios, depuración de pruebas y configuración institucional. |
+| **Administrador Plataforma** | **Vicente Administrador** | `vicente@nuam.com` | `11.222.333-4` | `123456` o `📲 OTP` | Control total, matriz RBAC, gestión de usuarios, depuración de pruebas y configuración institucional (Administrador Raíz). |
+| **Administrador Plataforma** | **Administrador BACKUP** | `admin@nuam.com` | `14.555.666-7` | `123456` o `📲 OTP` | Contingencia operativa, alta disponibilidad y supervisión global del holding (Administrador de Respaldo). |
 
 > [!NOTE]
 > **Gestión de Secretos y Seguridad de Credenciales (ISO/IEC 27001 Control A.9.4.3):**  

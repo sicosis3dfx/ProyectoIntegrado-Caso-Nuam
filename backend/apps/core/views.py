@@ -533,10 +533,10 @@ class UsuarioDetailView(APIView):
         if not usuario:
             return Response({'error': 'Usuario no encontrado'}, status=status.HTTP_404_NOT_FOUND)
 
-        if usuario.rut == '11.222.333-4' and usuario.email.lower() == 'vicente@nuam.com':
+        if usuario.rut in ('11.222.333-4', '14.555.666-7') or usuario.email.lower() in ('vicente@nuam.com', 'admin@nuam.com'):
             return Response({
                 'error': 'OPERACION_DENEGADA',
-                'mensaje': 'No se puede eliminar la cuenta del Administrador Institucional raíz (Vicente Administrador).'
+                'mensaje': 'No se puede eliminar la cuenta de un Administrador de Plataforma institucional o de respaldo.'
             }, status=status.HTTP_400_BAD_REQUEST)
 
         if usuario.id_usuario == request.user.id_usuario:

@@ -261,7 +261,8 @@ El ecosistema se encuentra **100% operativo en producción cloud** con persisten
 | :--- | :--- | :--- | :--- | :---: | :--- |
 | **Operador Corredora** | **Angelo Corredor** | `angelo@nuam.com` / `operador@larrainvial.cl` | `12.345.678-9` | `123456` o `📲 OTP` | Ingesta masiva CSV y validación DJ 1949. Cierre de lotes bloqueado (HTTP 403 Forbidden por SoD). |
 | **Auditor nuam** | **Martín Auditor** | `martin@nuam.com` / `auditor@nuam.com` | `9.876.543-2` | `123456` o `📲 OTP` | Fiscalización regional, auditoría SHA-256 y **aprobación/cierre definitivo de lotes fiscales**. |
-| **Administrador Plataforma** | **Vicente Administrador** | `vicente@nuam.com` / `admin@nuam.com` | `11.222.333-4` | `123456` o `📲 OTP` | Control total, matriz RBAC, gestión de usuarios y depuración de registros de prueba. |
+| **Administrador Plataforma** | **Vicente Administrador** | `vicente@nuam.com` | `11.222.333-4` | `123456` o `📲 OTP` | Control total, matriz RBAC, gestión de usuarios y depuración de registros (Administrador Raíz Institucional). |
+| **Administrador Plataforma** | **Administrador BACKUP** | `admin@nuam.com` | `14.555.666-7` | `123456` o `📲 OTP` | Contingencia operativa, alta disponibilidad y supervisión global del holding (Administrador de Respaldo). |
 
 > [!NOTE]
 > **Gestión de Secretos y Seguridad de Credenciales (ISO/IEC 27001 Control A.9.4.3):**  
