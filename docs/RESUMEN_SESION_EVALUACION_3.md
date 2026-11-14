@@ -83,7 +83,8 @@ Para labores de inspección de modelos ORM, tablas físicas y revisión de bases
   * *Derechos ARCO:* Soporte nativo para Rectificación (`PATCH /usuarios/<id>/`) y Supresión/Cancelación (`DELETE /usuarios/<id>/`).
   * *Accountability:* Bitácora inmutable sellada con hash SHA-256 por cada mutación de datos.
   * *Contraseñas Reforzadas:* Validación de 5 directivas (mínimo 8 caracteres, mayúscula, minúscula, número y símbolo especial) con checklist interactivo `PasswordPolicyChecklist` en el frontend.
-* **Validación de RUT Chileno (Módulo 11):** Auto-formato en tiempo real (`XX.XXX.XXX-X`), cálculo del dígito verificador y normalización canónica en backend permitiendo login con o sin puntos/guión.
+* **Validación de RUT Chileno y Mensajería Natural:** Auto-formato en tiempo real (`XX.XXX.XXX-X`), cálculo del dígito verificador y normalización canónica en backend permitiendo login con o sin puntos/guión, con feedback amigable y humano (`✅ RUT válido` / `⚠️ RUT o dígito verificador incorrecto`).
+* **Auditoría Integral de Creación de Usuarios (`CREACION_USUARIO_RBAC`):** Sellado criptográfico SHA-256 en `TB_AUDIT_LOGS` de cada alta de usuario realizada por el Administrador.
 
 ### 3.5. Optimización UI/UX Responsiva y Componentes Modernos
 * **Menú Hamburguesa Móvil (☰ / ✕):** Cajón lateral deslizante (*off-canvas drawer*) en dispositivos $\le 768px$ con fondo translúcido (*backdrop*).
@@ -93,7 +94,8 @@ Para labores de inspección de modelos ORM, tablas físicas y revisión de bases
 * **Modal Preventivo de Confirmación de Ingesta:** Diálogo modal perfectamente centrado en pantalla (`max-width: 620px`, animación `modalFadeInCenter` sin desfaces) con la misma estética de vidrio oscuro y spinner circular del `FloatingLoader`. Intercepta la subida o arrastre de nóminas CSV, presentando los metadatos técnicos completos (nombre de archivo con tooltip, formato, tamaño y nombre íntegro del operador sin truncamiento). En dispositivos móviles ($\le 480px$), los datos se apilan verticalmente y los botones de acción (*"No, Cancelar"* / *"Sí, Ingestar Nómina"*) se extienden al 100% para evitar errores de digitación y garantizar una ergonomía táctil óptima.
 * **TopBar Fijo Dinámico:** Utiliza `useWindowScroll` para volverse *sticky* con desenfoque de fondo (`backdrop-filter: blur(12px)`) durante el scroll en celulares.
 * **Skeleton Shimmer Loading:** Animación de carga fluida en tablas para una percepción de velocidad instantánea.
-* **Micro-Footer Institucional (Slim Footer):** Pie de página corporativo sutil ubicado al fondo de las vistas de la plataforma, que sella el cumplimiento con los entes supervisores del holding (CMF · SMV · SFC), las resoluciones tributarias (DJ 1949/1922 SII), normativas de seguridad (ISO/IEC 27001, Ley 21.719) y versión de producción (`v3.2.0-LTS`). Diseñado con layout flexible y apilado centrado en dispositivos móviles.
+* **Micro-Footer Institucional (Slim Footer):** Pie de página corporativo centrado y compacto en dos líneas ubicado al fondo de las vistas de la plataforma, que sella el cumplimiento con los entes supervisores del holding (CMF · SMV · SFC), las resoluciones tributarias (DJ 1949/1922 SII), normativas de seguridad (ISO/IEC 27001, Ley 21.719) y versión de producción (`v3.2.0-LTS`). Diseñado con layout flexible y apilado centrado en dispositivos móviles.
+* **Logo Corporativo Interactivo:** Acceso directo desde el imagotipo y texto de nuam en el topbar para navegar al Dashboard de Cierre Fiscal con scroll suave.
 * **Limpieza Institucional:** Eliminación de nomenclaturas académicas (`CU-01`, `CU-07`, etc.) sustituidas por terminología bancaria formal.
 
 ### 3.6. Backoffice Administrativo Django Personalizado
