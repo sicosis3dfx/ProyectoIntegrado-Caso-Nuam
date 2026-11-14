@@ -19,6 +19,14 @@
   padding: 2rem;
   background-color: var(--bg-main);
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.nuam-view-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Topbar */
@@ -1790,6 +1798,48 @@
 }
 
 /* ==============================================================================
+   MICRO-FOOTER INSTITUCIONAL (SLIM FOOTER)
+   ============================================================================== */
+.nuam-app-footer {
+  margin-top: 3.5rem;
+  padding-top: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  white-space: nowrap;
+}
+
+.footer-bullet {
+  color: rgba(148, 163, 184, 0.35);
+}
+
+.footer-version {
+  color: #94a3b8;
+  font-size: 0.72rem;
+  background: rgba(30, 41, 59, 0.6);
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  border: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+/* ==============================================================================
    DISEÑO RESPONSIVO (MOBILE & TABLET ADAPTATION)
    Garantiza adaptabilidad en smartphones sin alterar la vista desktop
    ============================================================================== */
@@ -2097,6 +2147,31 @@
     justify-content: center;
     padding: 0.75rem;
     font-size: 0.9rem;
+  }
+
+  /* Micro-Footer Adaptativo en Móviles */
+  .nuam-app-footer {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 1.25rem;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.45rem;
+  }
+
+  .footer-left,
+  .footer-center,
+  .footer-right {
+    white-space: normal;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .footer-bullet {
+    display: none;
   }
 }
 

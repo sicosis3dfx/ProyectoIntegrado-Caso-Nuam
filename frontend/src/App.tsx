@@ -11,6 +11,7 @@ import { RepositoryView } from './components/RepositoryView';
 import { AuditLogView } from './components/AuditLogView';
 import { RbacAdminView } from './components/RbacAdminView';
 import { FloatingLoader } from './components/FloatingLoader';
+import { Footer } from './components/Footer';
 import './App.css';
 
 export function App() {
@@ -77,32 +78,36 @@ export function App() {
             />
 
             <main className="nuam-content-area">
-              {currentView === 'dashboard' && (
-                <DashboardView
-                  usuario={usuario}
-                  onNavigateToUpload={() => setCurrentView('upload')}
-                  onNavigateToRepository={() => setCurrentView('repository')}
-                />
-              )}
+              <div className="nuam-view-wrapper">
+                {currentView === 'dashboard' && (
+                  <DashboardView
+                    usuario={usuario}
+                    onNavigateToUpload={() => setCurrentView('upload')}
+                    onNavigateToRepository={() => setCurrentView('repository')}
+                  />
+                )}
 
-              {currentView === 'upload' && (
-                <UploadCsvView
-                  usuario={usuario}
-                  onSuccess={() => setCurrentView('dashboard')}
-                />
-              )}
+                {currentView === 'upload' && (
+                  <UploadCsvView
+                    usuario={usuario}
+                    onSuccess={() => setCurrentView('dashboard')}
+                  />
+                )}
 
-              {currentView === 'repository' && (
-                <RepositoryView usuario={usuario} />
-              )}
+                {currentView === 'repository' && (
+                  <RepositoryView usuario={usuario} />
+                )}
 
-              {currentView === 'audit' && (
-                <AuditLogView />
-              )}
+                {currentView === 'audit' && (
+                  <AuditLogView />
+                )}
 
-              {currentView === 'rbac' && usuario.rol === 'Administrador Plataforma' && (
-                <RbacAdminView />
-              )}
+                {currentView === 'rbac' && usuario.rol === 'Administrador Plataforma' && (
+                  <RbacAdminView />
+                )}
+              </div>
+
+              <Footer />
             </main>
           </div>
         </div>

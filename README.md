@@ -54,6 +54,7 @@ La interfaz web cubre el **100% de los procesos de negocio exigidos** bajo dise�
 * **Notificación Flotante con Branding nuam (`FloatingLoader`):** Ubicada en la parte superior central con animación suave de descenso, imagotipo de nuam y spinner circular en degradado naranja-rojo (`#f97316` / `#ef4444`). Cuenta con ajuste multilínea automático para pantallas móviles.
 * **Modal Preventivo de Confirmación de Ingesta Masiva:** Diálogo modal perfectamente centrado (`max-width: 620px`) con la misma estética de vidrio oscuro (`backdrop-filter: blur(20px)`) y spinner corporativo nuam. Intercepta la acción de arrastrar o seleccionar archivos CSV, mostrando los metadatos completos (nombre, formato, tamaño y operador sin recortes). En smartphones ($\le 480px$), los datos se apilan verticalmente y los botones de acción se extienden al 100% para máxima comodidad ergonómica.
 * **Botón de Visibilidad de Contraseña (Ojo):** Alternancia dinámica en el formulario de login para visualizar u ocultar credenciales con iconos SVG accesibles y alineación perfecta.
+* **Micro-Footer Institucional (Slim Footer):** Pie de página corporativo discreto ubicado al fondo de las vistas con metadatos del holding regional (BCS · BVL · bvc), entes supervisores (CMF, SMV, SFC), normativas vigentes (DJ 1949/1922 SII, ISO 27001, Ley 21.719) y versión de producción cloud (`v3.2.0-LTS`).
 * **Skeleton Shimmer Loading:** Esqueletos de carga con gradiente animado en tablas para evitar saltos de interfaz durante la consulta a la base de datos en la nube.
 
 ---

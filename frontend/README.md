@@ -27,6 +27,7 @@
    * `useWindowScroll`: Topbar fijo (*sticky*) con desenfoque dinámico (`backdrop-filter: blur(12px)`) durante el desplazamiento en celulares.
 7. **Formulario con Auto-formato de RUT:** Detección de teclado numérico con formateo instantáneo a `XX.XXX.XXX-X` y validación de dígito verificador Módulo 11 (CMF).
 8. **Checklist Interactivo de Contraseñas:** Validación visual en tiempo real de políticas reforzadas ISO/IEC 27001 (mayúscula, minúscula, número y símbolo especial).
+9. **Micro-Footer Institucional (`Footer.tsx`):** Pie de página slim corporativo que sella la plataforma con los entes reguladores (CMF, SMV, SFC), resoluciones SII (DJ 1949/1922), leyes de protección de datos y versión `v3.2.0-LTS`. Con diseño 100% responsivo para móviles.
 
 ---
 
