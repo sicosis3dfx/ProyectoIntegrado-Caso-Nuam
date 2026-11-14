@@ -2131,6 +2131,32 @@
     width: 100%;
     justify-content: space-between;
   }
+
+  /* Filas de detalles adaptables en pantallas estrechas (<= 480px) */
+  .file-detail-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
+  }
+
+  .detail-label {
+    font-size: 0.8rem;
+  }
+
+  .detail-value {
+    text-align: left;
+    width: 100%;
+    font-size: 0.85rem;
+  }
+
+  .detail-filename {
+    max-width: 100%;
+  }
+
+  .confirm-file-details {
+    padding: 0.85rem 1rem;
+    gap: 0.65rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
