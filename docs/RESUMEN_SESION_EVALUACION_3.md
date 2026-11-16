@@ -111,7 +111,7 @@ Para labores de inspección de modelos ORM, tablas físicas y revisión de bases
 ### 3.7. Enrutamiento y Conectividad Perimetral
 * **Render $\to$ Vercel:** La ruta raíz `https://proyectointegrado-caso-nuam.onrender.com/` redirige vía HTTP 302 a `https://proyecto-integrado-caso-nuam.vercel.app`, evitando pantallas de error 404 o interfaces de depuración.
 * **Vercel $\to$ Render:** La ruta `https://proyecto-integrado-caso-nuam.vercel.app/admin` redirige mediante `vercel.json` e `index.html` al backoffice Django en Render.
-* **Manejo del Cold Start:** Documentación formal que explica que la suspensión por inactividad tras 15 minutos en Render Free Tier es una optimización de cómputo cloud académica, mitigable mediante el endpoint de salud `/api/v1/salud/` 5 minutos antes de la defensa.
+* **Manejo del Cold Start y Mitigación Keep-Alive:** Para neutralizar la suspensión por inactividad de Render Free Tier tras 15 minutos, se integró una automatización CI/CD con GitHub Actions (`keep_alive.yml`) que sondea cada 10 minutos el endpoint ligero `/api/v1/salud/`, garantizando que el servidor responda de inmediato (< 50 ms) durante toda la evaluación.
 
 ---
 
@@ -178,8 +178,8 @@ Para realizar la demostración interactiva ante la docente:
 ### P5: ¿Cómo cumple el sistema con la Ley N° 21.719 de Protección de Datos Personales?
 > **Respuesta:** *"El sistema implementa el principio de Privacidad desde el Diseño (*Privacy by Design*). Incorpora los Derechos ARCO: rectificación de perfiles (`PATCH /usuarios/<id>/`) y supresión/cancelación de cuentas (`DELETE /usuarios/<id>/`). Además, las contraseñas se almacenan mediante salteado irreversible PBKDF2-SHA256 con flag `write_only: True` para evitar su fuga en las respuestas JSON, y cada mutación queda registrada en la bitácora inmutable bajo el principio de responsabilidad proactiva (*Accountability*)."*
 
-### P6: ¿Por qué la primera petición de inicio de sesión tras horas de inactividad puede tardar unos segundos?
-> **Respuesta:** *"Para efectos de la evaluación académica, el backend está alojado en una capa gratuita (*Free Tier*) de Render. Esta modalidad cuenta con una política de optimización energética de suspensión de contenedores (*spin-down*) tras 15 minutos sin tráfico HTTP. Al recibir la primera petición, realiza un arranque en frío (*Cold Start*) inicializando el entorno Python 3.12 / 3.13, el servidor Gunicorn y el pool de conexiones seguras hacia Supabase y MongoDB Atlas (~30-50 segundos). Una vez activo, el sistema responde con latencias ultra-bajas (< 50 ms). En producción industrial en nuam EXCHANGE, la arquitectura se dimensiona sobre clústeres elásticos reservados (AWS ECS Fargate o Kubernetes) con alta disponibilidad permanente."*
+### P6: ¿Por qué la primera petición de inicio de sesión tras horas de inactividad podría tardar unos segundos y cómo está mitigado?
+> **Respuesta:** *"Para efectos de la evaluación académica, el backend está alojado en una capa gratuita (*Free Tier*) de Render, cuya política suspende contenedores tras 15 minutos sin tráfico HTTP. Para neutralizar el arranque en frío (*Cold Start*), implementamos una automatización CI/CD con **GitHub Actions** (`keep_alive.yml`) que sondea cada 10 minutos el endpoint ligero `/api/v1/salud/`, conservando el servidor despierto 24/7 en caliente (*Warm State*) con latencias inferiores a 50 ms. En producción industrial en nuam EXCHANGE, la arquitectura se dimensiona sobre clústeres elásticos reservados (AWS ECS Fargate o Kubernetes) con alta disponibilidad permanente."*
 
 ---
 
