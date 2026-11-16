@@ -1,0 +1,35 @@
+name: nuam Backend Keep-Alive (Prevenir Reposo en Render)
+
+on:
+  schedule:
+    # Se ejecuta automáticamente cada 10 minutos
+    # (Render entra en modo reposo tras 15 minutos continuos de inactividad)
+    - cron: '*/10 * * * *'
+  workflow_dispatch: # Permite disparar la acción manualmente desde GitHub Actions
+
+jobs:
+  ping-render-backend:
+    name: Keep-Warm Ping a Render
+    runs-on: ubuntu-latest
+    steps:
+      - name: Enviar Ping HTTP al Endpoint de Salud
+        run: |
+          echo "=========================================================="
+          echo "Fecha y Hora del Ping (UTC): $(date)"
+          echo "Destino: https://proyectointegrado-caso-nuam.onrender.com/api/v1/salud/"
+          echo "=========================================================="
+
+          HTTP_CODE=$(curl -s -o response.json -w "%{http_code}" --max-time 60 https://proyectointegrado-caso-nuam.onrender.com/api/v1/salud/)
+
+          echo "Código HTTP retornado: $HTTP_CODE"
+          if [ -f response.json ]; then
+            echo "Cuerpo de respuesta:"
+            cat response.json
+            echo ""
+          fi
+
+          if [ "$HTTP_CODE" -eq 200 ] || [ "$HTTP_CODE" -eq 301 ] || [ "$HTTP_CODE" -eq 302 ]; then
+            echo "✅ Servidor activo en caliente (Warm State). Latencia óptima asegurada."
+          else
+            echo "⚠️ Aviso de respuesta HTTP: $HTTP_CODE (El contenedor se reactivó o está inicializando)."
+          fi

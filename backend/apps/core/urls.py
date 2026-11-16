@@ -8,10 +8,14 @@ from apps.core.views import (
     LoginView, UploadDividendosView, CalcularFactoresView,
     CertificadosListView, CerrarLoteFiscalView, CertificadoDetailDeleteView,
     LimpiarCertificadosPruebaView, AuditoriaListView,
-    DashboardStatsView, UsuariosListCreateView, UsuarioDetailView, RolesListView
+    DashboardStatsView, UsuariosListCreateView, UsuarioDetailView, RolesListView,
+    HealthCheckView
 )
 
 urlpatterns = [
+    # Monitoreo de Salud / Keep-Alive
+    path('salud/', HealthCheckView.as_view(), name='api-salud'),
+
     # CU-01 & Autenticación MFA
     path('auth/login/', LoginView.as_view(), name='api-login'),
 

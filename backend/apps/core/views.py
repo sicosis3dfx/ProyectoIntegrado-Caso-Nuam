@@ -583,3 +583,22 @@ class RolesListView(APIView):
         roles = Rol.objects.all().order_by('nivel_acceso')
         serializer = RolSerializer(roles, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class HealthCheckView(APIView):
+    """
+    GET /api/v1/salud/
+    Endpoint de salud liviano para Keep-Alive y monitoreo de estado (HTTP 200).
+    Exento de autenticación para servicios de uptime y cron jobs.
+    """
+    authentication_classes = []
+    permission_classes = []
+
+    def get(self, request):
+        return Response({
+            'status': 'HEALTHY',
+            'servicio': 'nuam Exchange Group - Core API',
+            'timestamp': timezone.now().isoformat(),
+            'version': '3.2.0-LTS'
+        }, status=status.HTTP_200_OK)
+
