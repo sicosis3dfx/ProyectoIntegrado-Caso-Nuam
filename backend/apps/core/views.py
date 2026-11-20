@@ -10,6 +10,7 @@ Implementación estricta de compuertas BPMN 2.0 y Códigos de Respuesta HTTP:
 
 from decimal import Decimal
 from django.db.models import Sum, Count, Q
+from django.utils import timezone
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response

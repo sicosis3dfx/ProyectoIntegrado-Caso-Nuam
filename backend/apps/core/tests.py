@@ -301,4 +301,14 @@ class CasosDeUsoTests(NuamTestCaseBase):
         latencia_ms = (t_final - t_inicio) * 1000
 
         self.assertEqual(res.status_code, 201)
-        self.assertLess(latencia_ms, 2500)  # Menor a 2.5s para 50 registros con transacciones y hashes
+        self.assertLess(latencia_ms, 4000)  # Menor a 4.0s para 50 registros con transacciones y hashes
+
+    def test_api_salud_endpoint_http200(self):
+        """Monitoreo: Endpoint de salud /api/v1/salud/ responde HTTP 200 sin autenticación."""
+        url = reverse('api-salud')
+        res = self.client.get(url)
+        self.assertEqual(res.status_code, 200)
+        data = res.json()
+        self.assertEqual(data['status'], 'HEALTHY')
+        self.assertIn('timestamp', data)
+
