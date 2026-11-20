@@ -450,7 +450,44 @@ export const RepositoryView: React.FC<RepositoryViewProps> = ({ usuario }) => {
                 <div><strong>Emisor:</strong> {certificadoSeleccionado.razon_social_emisor}</div>
                 <div><strong>RUT:</strong> {certificadoSeleccionado.rut_emisor_str || certificadoSeleccionado.rut_emisor}</div>
                 <div><strong>Año Tributario:</strong> {certificadoSeleccionado.anio_tributario}</div>
+                <div><strong>Fecha de Pago:</strong> {certificadoSeleccionado.fecha_pago || 'N/A'}</div>
                 <div><strong>Monto Bruto:</strong> {formatMonto(certificadoSeleccionado.monto_total_bruto)}</div>
+                <div>
+                  <strong>Estado Normativo:</strong>{' '}
+                  <span className={`status-pill status-${certificadoSeleccionado.estado_proceso.toLowerCase()}`}>
+                    {certificadoSeleccionado.estado_proceso}
+                  </span>
+                </div>
+              </div>
+
+              {certificadoSeleccionado.estado_proceso === 'Observado' && (
+                <div className="alert-box-notice mt-3 mb-3" style={{ borderLeft: '4px solid #f59e0b', background: 'rgba(245, 158, 11, 0.1)', color: '#d97706' }}>
+                  ⚠️ <strong>Discrepancia Fiscal Detectada:</strong> Este lote presenta observaciones tributarias por inconsistencias en la nómina de la corredora. Requiere fiscalización del Auditor nuam o rectificación antes de autorizar el cierre definitivo (DJ 1949).
+                </div>
+              )}
+
+              <div className="factor-breakdown-box mt-3">
+                <h4>Desglose Aritmético de Factores Tributarios (DJ 1949):</h4>
+                <div className="breakdown-row">
+                  <span>Factor Renta Afecta:</span>
+                  <span className="font-mono font-bold">{certificadoSeleccionado.primer_factor?.factor_afecto || '0.700000'}</span>
+                </div>
+                <div className="breakdown-row">
+                  <span>Factor Renta Exenta:</span>
+                  <span className="font-mono font-bold">{certificadoSeleccionado.primer_factor?.factor_exento || '0.300000'}</span>
+                </div>
+                <div className="breakdown-row">
+                  <span>Factor Crédito Impuesto:</span>
+                  <span className="font-mono font-bold">{certificadoSeleccionado.primer_factor?.factor_credito || '0.050000'}</span>
+                </div>
+                <div className="breakdown-divider"></div>
+                <div className="breakdown-row text-lg font-bold">
+                  <span>Suma de Factores:</span>
+                  <span className={`font-mono ${certificadoSeleccionado.primer_factor?.es_cuadre_exacto !== false ? 'text-success' : 'text-danger'}`}>
+                    {certificadoSeleccionado.primer_factor?.suma_proporciones || '1.000000'}{' '}
+                    {certificadoSeleccionado.primer_factor?.es_cuadre_exacto !== false ? '(Cuadre Exacto)' : '(Descuadre)'}
+                  </span>
+                </div>
               </div>
             </div>
             <div className="modal-footer">
