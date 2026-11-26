@@ -344,7 +344,7 @@ Suite de Pruebas Automatizadas (python manage.py test apps.core)
 └── Benchmark de Estrés y Concurrencia (50 ingestas consecutivas)
 ```
 
-* **12 de 12 Pruebas Unitarias Aprobadas (100% OK):** Ejecutadas en `20.87s` sin fallos.
+* **13 de 13 Pruebas Unitarias Aprobadas (100% OK):** Ejecutadas en `~13s` sin fallos (incluye las 12 pruebas de casos de uso + prueba unitaria de disponibilidad Keep-Warm `/api/v1/salud/`).
 * **11 de 11 Casos del Protocolo QA Aprobados (100% OK):** Detallados con captura de latencia y código de estado.
 
 ---
