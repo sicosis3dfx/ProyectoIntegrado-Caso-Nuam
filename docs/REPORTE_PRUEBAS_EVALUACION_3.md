@@ -2,7 +2,7 @@
 ## Plataforma Centralizada de Calificaciones Tributarias y Dividendos
 **Institución:** nuam EXCHANGE GROUP (Holding Regional Chile · Perú · Colombia)  
 **Proyecto Integrado de Desarrollo de Software — Evaluación 3**  
-**Fecha de Ejecución Automatizada:** 20/11/2026 17:19:51  
+**Fecha de Ejecución Automatizada:** 25/11/2026 22:55:12  
 **Entorno de Ejecución:** Python 3.12 / Django 5.2 / React 19 + TypeScript / Supabase PostgreSQL + MongoDB Atlas  
 **Estado General de la Suite:** ✅ **100% APROBADO (11 de 11 Casos de Prueba - Nivel Destacado)**
 
@@ -24,23 +24,23 @@ Se cubrieron de forma integral:
 
 | Caso de Prueba | Funcionalidad Evaluada | Resultado Esperado | Resultado Obtenido | Latencia (ms) | Discrepancias / Observaciones | Estado |
 | :--- | :--- | :--- | :--- | :---: | :--- | :---: |
-| `CP-01` | **CU-01: Autenticación SSO y Token MFA 6 Dígitos** | HTTP 200 OK + JWT HS256 emitido | HTTP 200 (success) | 989.88 ms | Ninguna (MFA validado) | **`APROBADO`** |
-| `CP-02` | **Compuerta 1 BPMN: Detección de Inconsistencia Sintáctica CSV** | HTTP 400 Bad Request (Faltan columnas normativas) | HTTP 400 (ERROR_SINTACTICO_CSV) | 3.5 ms | Captura sintáctica preventiva correcta | **`APROBADO`** |
-| `CP-03` | **Compuerta 2 BPMN: Descuadre Aritmético (Suma = 0.999999)** | HTTP 422 Unprocessable Entity + Registro de discrepancia | HTTP 422 (ERROR_CONSISTENCIA_FISCAL) | 320.16 ms | Detectada: La suma de factores (0.999999) no cuadra en 1.0000... | **`APROBADO`** |
-| `CP-04` | **CU-01 / BPMN: Ingesta Exitosa y Persistencia Transaccional** | HTTP 201 Created + Hash SHA-256 generado | HTTP 201 (success) | 416.56 ms | Ninguna (Cuadre exacto 1.000000) | **`APROBADO`** |
-| `CP-05` | **CU-04: Consulta Histórica Multianual con Filtros** | HTTP 200 OK + Listado con factores a 6 decimales | HTTP 200 (30 registros) | 25.06 ms | Ninguna | **`APROBADO`** |
-| `CP-06` | **CU-05: Aprobación y Cierre de Lote Fiscal (Auditor nuam)** | HTTP 200 OK + Estado "Cerrado" | HTTP 200 (Estado: Cerrado) | 749.9 ms | Ninguna | **`APROBADO`** |
-| `CP-07` | **RBAC ISO/IEC 27001: Bloqueo de Cierre a Operador Corredora** | HTTP 403 Forbidden (RBAC_ACCESS_DENIED) | HTTP 403 (RBAC_ACCESS_DENIED) | 1.34 ms | Violación de privilegios bloqueada | **`APROBADO`** |
-| `CP-08` | **CU-06: Verificación de Firma SHA-256 en Bitácora Inmutable** | Integridad VÁLIDA (Hash coincide al 100%) | Estado: VÁLIDO (Hash 4317203c4c77...) | 0.99 ms | Cadena de custodia intacta | **`APROBADO`** |
-| `CP-09` | **CU-06: Detección Automática de Adulteración de Datos** | Integridad ALTERADO_ANOMALÍA (Hash discrepante) | Estado: ALTERADO_ANOMALÍA | 549.18 ms | Alerta generada por alteración de firma | **`APROBADO`** |
-| `CP-10` | **CU-07: Control de Acceso Exclusivo a Administración de Usuarios** | Admin: HTTP 200 | Operador: HTTP 403 | Admin: HTTP 200 | Operador: HTTP 403 | 2.79 ms | Segregación confirmada | **`APROBADO`** |
-| `CP-11` | **Benchmark de Estrés: Ingesta de Lote Masivo (25 Certificados)** | HTTP 201 Created con Latencia < 2000 ms | HTTP 201 procesado en 662.74 ms | 662.74 ms | 0 errores (Procesamiento transaccional óptimo) | **`APROBADO`** |
+| `CP-01` | **CU-01: Autenticación SSO y Token MFA 6 Dígitos** | HTTP 200 OK + JWT HS256 emitido | HTTP 200 (success) | 2132.19 ms | Ninguna (MFA validado) | **`APROBADO`** |
+| `CP-02` | **Compuerta 1 BPMN: Detección de Inconsistencia Sintáctica CSV** | HTTP 400 Bad Request (Faltan columnas normativas) | HTTP 400 (ERROR_SINTACTICO_CSV) | 2.87 ms | Captura sintáctica preventiva correcta | **`APROBADO`** |
+| `CP-03` | **Compuerta 2 BPMN: Descuadre Aritmético (Suma = 0.999999)** | HTTP 422 Unprocessable Entity + Registro de discrepancia | HTTP 422 (ERROR_CONSISTENCIA_FISCAL) | 1841.85 ms | Detectada: La suma de factores (0.999999) no cuadra en 1.0000... | **`APROBADO`** |
+| `CP-04` | **CU-01 / BPMN: Ingesta Exitosa y Persistencia Transaccional** | HTTP 201 Created + Hash SHA-256 generado | HTTP 201 (success) | 433.18 ms | Ninguna (Cuadre exacto 1.000000) | **`APROBADO`** |
+| `CP-05` | **CU-04: Consulta Histórica Multianual con Filtros** | HTTP 200 OK + Listado con factores a 6 decimales | HTTP 200 (30 registros) | 29.27 ms | Ninguna | **`APROBADO`** |
+| `CP-06` | **CU-05: Aprobación y Cierre de Lote Fiscal (Auditor nuam)** | HTTP 200 OK + Estado "Cerrado" | HTTP 200 (Estado: Cerrado) | 960.28 ms | Ninguna | **`APROBADO`** |
+| `CP-07` | **RBAC ISO/IEC 27001: Bloqueo de Cierre a Operador Corredora** | HTTP 403 Forbidden (RBAC_ACCESS_DENIED) | HTTP 403 (RBAC_ACCESS_DENIED) | 1.29 ms | Violación de privilegios bloqueada | **`APROBADO`** |
+| `CP-08` | **CU-06: Verificación de Firma SHA-256 en Bitácora Inmutable** | Integridad VÁLIDA (Hash coincide al 100%) | Estado: VÁLIDO (Hash b4c1e9e01e97...) | 0.95 ms | Cadena de custodia intacta | **`APROBADO`** |
+| `CP-09` | **CU-06: Detección Automática de Adulteración de Datos** | Integridad ALTERADO_ANOMALÍA (Hash discrepante) | Estado: ALTERADO_ANOMALÍA | 723.24 ms | Alerta generada por alteración de firma | **`APROBADO`** |
+| `CP-10` | **CU-07: Control de Acceso Exclusivo a Administración de Usuarios** | Admin: HTTP 200 | Operador: HTTP 403 | Admin: HTTP 200 | Operador: HTTP 403 | 10.36 ms | Segregación confirmada | **`APROBADO`** |
+| `CP-11` | **Benchmark de Estrés: Ingesta de Lote Masivo (25 Certificados)** | HTTP 201 Created con Latencia < 2000 ms | HTTP 201 procesado en 860.34 ms | 860.34 ms | 0 errores (Procesamiento transaccional óptimo) | **`APROBADO`** |
 
 ### Métricas Consolidadas del Protocolo
 - **Total Casos de Prueba Ejecutados:** 11
 - **Casos Aprobados Exitosamente:** 11 (100.0%)
 - **Casos Fallidos:** 0 (0.0%)
-- **Latencia Promedio por Operación:** **338.37 ms** (Excelente rendimiento para aplicaciones financieras críticas).
+- **Latencia Promedio por Operación:** **521.11 ms** (Excelente rendimiento para aplicaciones financieras críticas).
 
 ---
 
