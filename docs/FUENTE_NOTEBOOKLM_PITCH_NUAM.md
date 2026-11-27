@@ -9,7 +9,7 @@
 * **Equipo Consultor y Roles:**
   * **Angelo Alberto Zamora Romero:** Consultor Líder Frontend & UI/UX (React 19 / TypeScript / Vite).
   * **Martín Ignacio Tapia Jaramillo:** Consultor Líder Backend & Arquitectura de Datos (Django 5.2 / PostgreSQL 3FN).
-  * **Vicente Muñoz:** Consultor Líder QA, Ciberseguridad & Cumplimiento Normativo (ISO/IEC/IEEE 29119 / ISO 27001).
+  * **Vicente Sagredo:** Consultor Líder QA, Ciberseguridad & Cumplimiento Normativo (ISO/IEC/IEEE 29119 / ISO 27001).
 
 ---
 
