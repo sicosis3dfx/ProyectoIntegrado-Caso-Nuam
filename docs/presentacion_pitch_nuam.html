@@ -829,19 +829,20 @@
     // Pitch Script aligned to each slide
     const speakerNotes = [
       // Slide 1 (0:00 - 0:30) — Pregunta ancla + Impacto del problema
-      `"¿Sabían que un simple descuadre de apenas mil pesos en una planilla de dividendos puede paralizar la Operación Renta de una corredora de bolsa y costarle millones en multas ante el SII? En nuam EXCHANGE se transan miles de millones al día; sin embargo, muchas corredoras siguen calculando créditos tributarios en hojas de cálculo, provocando semanas de reprocesos, rechazos en la DJ 1949 y multas de hasta 1 UTA por certificado."`,
+      `"Buenos días. ¿Sabían que un simple descuadre de apenas mil pesos en una planilla de dividendos puede paralizar la Operación Renta de una corredora de bolsa y costarle millones en multas ante el SII? En nuam EXCHANGE se transan miles de millones al día; sin embargo, muchas corredoras siguen calculando créditos tributarios en hojas de cálculo, provocando semanas de reprocesos, rechazos en la DJ 1949 y multas de hasta 1 UTA por certificado.” `,
 
       // Slide 2 (0:30 - 0:55) — Presentación del equipo + Presentación de la solución
-      `"Para resolver este problema, nuestro equipo —Angelo Zamora en Frontend, Martín Tapia en Backend y Datos, y Vicente Sagredo en QA y Ciberseguridad— desarrollamos el Mantenedor Centralizado de Dividendos y Calificaciones Tributarias de nuam. Transformamos semanas de trabajo manual en una operación de solo 3 segundos para las declaraciones DJ 1949 y DJ 1922, eliminando los micro-descuadres de raíz."`,
+      `"Para resolver este problema, nuestro equipo —Angelo Zamora en Frontend, Vicente Sagredo en QA y Ciberseguridad, y quien les habla, Martín Tapia en Backend y Datos— desarrollamos el Mantenedor Centralizado de Dividendos y Calificaciones Tributarias de nuam. Transformamos semanas de trabajo manual en una operación de solo 3 segundos para las declaraciones DJ 1949 y DJ 1922, eliminando los micro-descuadres de raíz." `,
 
       // Slide 3 (0:50 - 1:25)
       `"¿Cómo lo logramos? Implementamos un motor de precisión decimal absoluta a 6 decimales. Si una nómina no cuadra exactamente en 1.000000, la rechaza en 350 milisegundos. Además, cuenta con dos compuertas BPMN y persistencia híbrida en PostgreSQL 3FN y MongoDB Atlas con firmas criptográficas SHA-256."`,
 
       // Slide 4 (1:25 - 1:55)
-      `"Blindamos la operación bajo la norma internacional ISO 27001 con segregación de funciones: el operador carga, pero solo el auditor aprueba el cierre fiscal. Y lo más importante: no es una promesa ni un diseño en papel; la plataforma está 100% construida, probada bajo ISO 29119 con 13 tests aprobados y operando en la nube con latencias menores a 500 ms."`,
+      `"Blindamos la operación bajo la norma internacional ISO 27001 con segregación de funciones: el operador carga, pero solo el auditor aprueba el cierre fiscal. Y lo más importante: no es una promesa ni un diseño en papel; la plataforma está 100% construida, probada bajo ISO 29119 con 13 tests aprobados y operando en la nube con latencias menores a 500 milisegundos."`,
 
       // Slide 5 (1:55 - 2:20)
-      `"El resultado es contundente: 100% de exactitud fiscal, cero multas del SII y más de un 80% de ahorro en tiempo. Esto significa que las corredoras ya no pasan semanas corrigiendo planillas a mano en plena Operación Renta. La plataforma ya está operando en la nube, responde en menos de 500 milisegundos y superó con éxito 13 pruebas automatizadas. Pero como en finanzas los hechos valen más que las palabras: veámosla funcionando en vivo en este preciso momento."`
+      `"El resultado es contundente: 100% de exactitud fiscal, cero multas del SII y más de un 80% de ahorro en tiempo. Esto significa que las corredoras ya no pasan semanas corrigiendo planillas a mano en plena Operación Renta. Pero como en finanzas los hechos valen más que las palabras: veámosla funcionando en vivo en este preciso momento."`
+
     ];
 
     function updateSlide(index) {
